@@ -1,4 +1,4 @@
-package com.example.memory_app.domain
+package com.example.memory_app.domain.model
 
 interface RandomCardsGenerator {
     fun generateListOfCards(difficulty : Difficulty, uniqueIds : List<Int>) : MutableList<Card>

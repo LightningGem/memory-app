@@ -1,4 +1,4 @@
-package com.example.memory_app.domain
+package com.example.memory_app.domain.model
 
 interface Game {
     fun onCardClicked(position: Int): Reaction

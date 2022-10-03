@@ -17,6 +17,4 @@ class GameFragment : Fragment() {
     ): View? {
         return inflater.inflate(R.layout.fragment_game, container, false)
     }
-
-
 }

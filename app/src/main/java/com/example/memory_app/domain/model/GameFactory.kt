@@ -1,4 +1,4 @@
-package com.example.memory_app.domain
+package com.example.memory_app.domain.model
 
 interface GameFactory {
     fun startNewGame(difficulty: Difficulty, cardsIds: List<Int>) : Game
