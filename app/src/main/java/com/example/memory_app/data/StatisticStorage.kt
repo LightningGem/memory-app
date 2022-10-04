@@ -5,13 +5,14 @@ import com.example.memory_app.domain.repository.Score
 import com.example.memory_app.domain.repository.Statistic
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 interface StatisticStorage {
     fun getStatistic() : Flow<Statistic>
     suspend fun updateStatistic()
 }
 
-class StatisticStorageTestImpl() : StatisticStorage {
+class StatisticStorageTestImpl @Inject constructor() : StatisticStorage {
     override fun getStatistic(): Flow<Statistic> = flow {
             emit(Statistic(Score(0), 0))
         }

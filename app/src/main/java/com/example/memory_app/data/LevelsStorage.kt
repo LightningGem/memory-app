@@ -4,13 +4,14 @@ import com.example.memory_app.domain.model.Difficulty
 import com.example.memory_app.domain.repository.Level
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
 interface LevelsStorage {
     fun getAllLevels(): Flow<List<Level>>
     suspend fun getLevel(name: String): Level
 }
 
-class LevelsStorageTestImpl() : LevelsStorage {
+class LevelsStorageTestImpl @Inject constructor() : LevelsStorage {
 
     private val levels : Map<String, Level> = hashMapOf(
         "Test1" to Level("Test1", Difficulty.EASY, listOf(0, 1, 2)),

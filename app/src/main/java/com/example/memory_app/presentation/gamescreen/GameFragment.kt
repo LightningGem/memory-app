@@ -6,17 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
-import com.example.memory_app.R
 import com.example.memory_app.databinding.FragmentGameBinding
-import com.example.memory_app.databinding.FragmentMenuBinding
-import com.example.memory_app.presentation.menuscreen.MenuViewModel
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class GameFragment : Fragment() {
 
     private var _binding: FragmentGameBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: MenuViewModel by viewModels()
+    private val viewModel: GameViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

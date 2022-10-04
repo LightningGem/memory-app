@@ -3,17 +3,24 @@ package com.example.memory_app.domain.use_cases
 import com.example.memory_app.domain.model.Difficulty
 import com.example.memory_app.domain.repository.GameRepository
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class LoadLevelsInfoUseCase (private val repository: GameRepository) {
-    operator fun invoke() = repository.getAllLevels().map { levels ->
-        levels.filter { predicate(it.difficulty) }.map { level ->
-            Triple(level.name, level.difficulty, level.CardIds)
+class LoadLevelsInfoUseCase @Inject constructor(private val repository: GameRepository) {
+
+    private val statisticFlow =  repository.getStatistic()
+
+    operator fun invoke() = statisticFlow.flatMapLatest { statistic ->
+        repository.getAllLevels().map { levels ->
+            levels
+                .filter { level -> predicate(level.difficulty, statistic.levelsCompleted) }
+                .map { level -> Triple(level.name, level.difficulty, level.CardIds)
+                }
         }
     }
 
-    private suspend fun predicate(difficulty: Difficulty) : Boolean {
-       val levelsCompleted = repository.getStatistic().first().levelsCompleted
+    private fun predicate(difficulty: Difficulty, levelsCompleted : Int) : Boolean {
         return when (difficulty) {
             Difficulty.EASY -> true
             Difficulty.MEDIUM -> (levelsCompleted > 10)
