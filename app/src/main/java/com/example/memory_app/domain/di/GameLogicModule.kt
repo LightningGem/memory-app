@@ -20,5 +20,4 @@ abstract class GameLogicModule {
         @Provides
         fun providesBoardGenerator(): BoardGenerator = BoardGeneratorImpl
     }
-
 }

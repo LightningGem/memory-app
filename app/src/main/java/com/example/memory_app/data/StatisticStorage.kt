@@ -9,15 +9,15 @@ import javax.inject.Inject
 
 interface StatisticStorage {
     fun getStatistic() : Flow<Statistic>
-    suspend fun updateStatistic()
+    suspend fun updateStatistic(statistic: Statistic)
 }
 
 class StatisticStorageTestImpl @Inject constructor() : StatisticStorage {
     override fun getStatistic(): Flow<Statistic> = flow {
-            emit(Statistic(Score(0), 0))
+            emit(Statistic(Score(0.0), 0))
         }
 
-    override suspend fun updateStatistic() {
+    override suspend fun updateStatistic(statistic: Statistic) {
         Log.d("updateStatistic", "Updated!")
     }
 }

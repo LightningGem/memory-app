@@ -2,21 +2,19 @@ package com.example.memory_app.domain.use_cases
 
 import com.example.memory_app.domain.model.Difficulty
 import com.example.memory_app.domain.repository.GameRepository
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
 class LoadLevelsInfoUseCase @Inject constructor(private val repository: GameRepository) {
 
-    private val statisticFlow =  repository.getStatistic()
+    private val statisticFlow = repository.getStatistic()
 
     operator fun invoke() = statisticFlow.flatMapLatest { statistic ->
         repository.getAllLevels().map { levels ->
             levels
                 .filter { level -> predicate(level.difficulty, statistic.levelsCompleted) }
-                .map { level -> Triple(level.name, level.difficulty, level.CardIds)
-                }
+                .map { level -> Pair(level.name, level.difficulty) }
         }
     }
 

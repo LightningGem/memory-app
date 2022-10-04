@@ -9,8 +9,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MenuViewModel @Inject constructor
-    (private val loadStatisticUseCase: LoadStatisticUseCase,
-     private val loadLevelsInfoUseCase: LoadLevelsInfoUseCase) : ViewModel() {
+    (loadStatisticUseCase: LoadStatisticUseCase,
+     loadLevelsInfoUseCase: LoadLevelsInfoUseCase) : ViewModel() {
 
     val statistic = loadStatisticUseCase().asLiveData()
     val levels = loadLevelsInfoUseCase().asLiveData()

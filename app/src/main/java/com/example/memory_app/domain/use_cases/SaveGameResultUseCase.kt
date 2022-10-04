@@ -7,19 +7,17 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-class SaveGameResultUseCase @Inject constructor(private val repository: GameRepository,
-                                                private val scope: CoroutineScope) {
+class SaveGameResultUseCase @Inject constructor(private val repository: GameRepository) {
 
-    operator fun invoke(mismatchedTimes : Int, difficulty: Difficulty) : Score {
+    suspend operator fun invoke(mismatchedTimes : Int, levelName: String) : Score {
+        val difficulty = repository.getLevel(levelName).difficulty
         val score = getScore(mismatchedTimes, difficulty)
-        scope.launch {
-            repository.updateStatistic(score)
-        }
+        repository.updateStatistic(score)
         return score
     }
 
     private fun getScore(mismatchedTimes : Int, difficulty: Difficulty) : Score {
         //    TODO("logic not implemented yet")
-        return Score(mismatchedTimes)
+        return Score(mismatchedTimes.toDouble())
     }
 }
