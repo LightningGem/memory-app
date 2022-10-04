@@ -9,7 +9,7 @@ class LoadGameUseCase(private val repository: GameRepository,
 
     suspend operator fun invoke(levelName : String) : Game {
         val level = repository.getLevel(levelName)
-        return gameFactory.startNewGame(level.difficulty, level.imageIds)
+        return gameFactory.startNewGame(level.difficulty, level.CardIds)
     }
 }
 

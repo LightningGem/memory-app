@@ -18,6 +18,7 @@ class SaveGameResultUseCase(private val repository: GameRepository,
     }
 
     private fun getScore(mismatchedTimes : Int, difficulty: Difficulty) : Score {
-        TODO("logic not implemented yet")
+        //    TODO("logic not implemented yet")
+        return Score(mismatchedTimes)
     }
 }

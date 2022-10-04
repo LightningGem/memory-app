@@ -1,5 +1,7 @@
 package com.example.memory_app.domain.model
 
+import com.example.memory_app.utils.ImmutableList
+
 interface Game {
     fun onCardClicked(position: Int): Reaction
     fun getBoard(): Reaction.Running
@@ -33,7 +35,7 @@ class GameImpl(
     }
 
 
-    override fun getBoard(): Reaction.Running = Reaction.Running(board.toList())
+    override fun getBoard(): Reaction.Running = Reaction.Running(ImmutableList(board))
 
     override fun onCardClicked(position: Int): Reaction {
         if (cardIsAlreadyOpen(position)) return Reaction.SameItemClicked
@@ -55,7 +57,7 @@ class GameImpl(
             return Reaction.Finished(board.toList(), mismatchedTimes)
         }
 
-        return Reaction.Running(board.toList())
+        return getBoard()
     }
 
 }

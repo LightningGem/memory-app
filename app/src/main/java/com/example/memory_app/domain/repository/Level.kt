@@ -4,5 +4,4 @@ import com.example.memory_app.domain.model.Difficulty
 
 data class Level(val name : String,
                  val difficulty: Difficulty,
-                 val imageIds : List<Int>,
-                 val faceDownImageId : Int)
+                 val CardIds : List<Int>)

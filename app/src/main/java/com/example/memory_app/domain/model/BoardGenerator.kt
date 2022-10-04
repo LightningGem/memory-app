@@ -1,10 +1,10 @@
 package com.example.memory_app.domain.model
 
-interface RandomCardsGenerator {
+interface BoardGenerator {
     fun generateListOfCards(difficulty : Difficulty, uniqueIds : List<Int>) : MutableList<Card>
 }
 
-object BoardGenerator : RandomCardsGenerator {
+object BoardGeneratorImpl : BoardGenerator {
     override fun generateListOfCards(
         difficulty: Difficulty,
         uniqueIds: List<Int>

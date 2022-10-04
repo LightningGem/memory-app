@@ -11,4 +11,3 @@ class GameViewModel(private val loadGameUseCase : LoadGameUseCase,
 
     private val levelName = savedStateHandle.get<String>("levelName")
 }
-
