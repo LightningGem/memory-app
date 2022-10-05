@@ -2,7 +2,6 @@ package com.example.memory_app.presentation.gamescreen
 
 import androidx.lifecycle.*
 import com.example.memory_app.domain.model.Card
-import com.example.memory_app.domain.model.Game
 import com.example.memory_app.domain.model.Reaction
 import com.example.memory_app.domain.repository.Score
 import com.example.memory_app.domain.use_cases.LoadLevelUseCase
@@ -18,20 +17,17 @@ class GameViewModel @Inject constructor
      savedStateHandle : SavedStateHandle) : ViewModel() {
 
     private val levelName = savedStateHandle.get<String>("levelName")
-    private val game = MutableLiveData<Game?>()
+    private val game = loadLevelUseCase(levelName!!)
 
-    private val _gameLoading = MutableLiveData<Boolean>(true)
-    val gameLoading : LiveData<Boolean> = _gameLoading
+    private val _cardsBoard = MutableLiveData(game.getBoard().cards)
+    val cardsBoard : LiveData<List<Card>> = _cardsBoard
 
-    private val _cardsBoard = MutableLiveData<List<Card>?>()
-    val cardsBoard : LiveData<List<Card>?> = _cardsBoard
-
-    private val _finalScore = MutableLiveData<Score?>()
-    val finalScore : LiveData<Score?> = _finalScore
+    private val _finalScore = MutableLiveData<Score>()
+    val finalScore : LiveData<Score> = _finalScore
 
 
     fun onCardClicked(position : Int) {
-        val reaction = game.value!!.onCardSelected(position)
+        val reaction = game.onCardSelected(position)
         when(reaction) {
             is Reaction.Running -> {
                 _cardsBoard.value = reaction.cards
@@ -48,13 +44,4 @@ class GameViewModel @Inject constructor
             }
         }
     }
-
-    init {
-        viewModelScope.launch {
-            game.value = loadLevelUseCase(levelName!!)
-            _cardsBoard.value = game.value!!.getBoard().cards
-            _gameLoading.value = false
-        }
-    }
-
 }

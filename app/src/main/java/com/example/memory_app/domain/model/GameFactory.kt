@@ -4,11 +4,11 @@ import javax.inject.Inject
 import javax.inject.Singleton
 
 interface GameFactory {
-    fun startNewGame(difficulty: Difficulty, cardsIds: List<Int>) : Game
+    fun startNewGame(cardsIds: List<Int>, difficulty: Difficulty) : Game
 }
 
 @Singleton
 class GameFactoryImpl @Inject constructor(private val boardGenerator : BoardGenerator) : GameFactory {
-    override fun startNewGame(difficulty: Difficulty, cardsIds: List<Int>): Game =
-        GameImpl(boardGenerator.generateListOfCards(difficulty, cardsIds), difficulty)
+    override fun startNewGame(cardsIds: List<Int>, difficulty: Difficulty): Game =
+        GameImpl(boardGenerator.generateListOfCards(difficulty, cardsIds), difficulty.cardsInRow)
 }

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">memory-app</string>
+    <string name="number_of_cards">number of cards : %s</string>
+    <string name="cards_in_row">cards in row : %s</string>
 </resources>

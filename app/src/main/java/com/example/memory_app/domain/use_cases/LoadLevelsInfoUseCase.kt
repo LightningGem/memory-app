@@ -22,7 +22,7 @@ class LoadLevelsInfoUseCase @Inject constructor(private val repository: GameRepo
         return when (difficulty) {
             Difficulty.EASY -> true
             Difficulty.MEDIUM -> (levelsCompleted > 10)
-            Difficulty.HARD -> (levelsCompleted > 20)
+            else -> (levelsCompleted > 20)
         }
     }
 }

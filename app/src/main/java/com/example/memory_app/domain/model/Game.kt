@@ -9,7 +9,7 @@ interface Game {
 
 class GameImpl(
     private val board: MutableList<Card>,
-    private val difficulty: Difficulty
+    private val cardsInRow: Int
 ) : Game {
 
     private val previouslySelectedCardsPositions: MutableList<Int> = mutableListOf()
@@ -42,7 +42,7 @@ class GameImpl(
 
         if (cardsInRowMismatched) restartRow{ copy(isFaceUp = false) }
 
-        if (previouslySelectedCardsPositions.size == difficulty.cardsInRow)
+        if (previouslySelectedCardsPositions.size == cardsInRow)
         { restartRow{ copy(isMatched = true) } }
 
         if (previouslySelectedCardsPositions.isNotEmpty() &&

@@ -10,6 +10,8 @@ object BoardGeneratorImpl : BoardGenerator {
         uniqueIds: List<Int>
     ): MutableList<Card> {
 
+        require(uniqueIds.isNotEmpty())
+
         val numberOfUniqueIds = difficulty.NumberOfCards / difficulty.cardsInRow
 
         if(uniqueIds.size != numberOfUniqueIds) {

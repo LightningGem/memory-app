@@ -6,10 +6,9 @@ import com.example.memory_app.domain.repository.GameRepository
 import javax.inject.Inject
 
 class LoadLevelUseCase @Inject constructor(private val repository: GameRepository,
-                                          private val gameFactory : GameFactory) {
-    suspend operator fun invoke(levelName : String) : Game {
+                                           private val gameFactory : GameFactory) {
+    operator fun invoke(levelName : String) : Game {
         val level = repository.getLevel(levelName)
-        return gameFactory.startNewGame(level.difficulty, level.CardIds)
+        return gameFactory.startNewGame(level.CardIds, level.difficulty)
     }
 }
-
