@@ -3,8 +3,6 @@ package com.example.memory_app.domain.use_cases
 import com.example.memory_app.domain.model.Difficulty
 import com.example.memory_app.domain.repository.GameRepository
 import com.example.memory_app.domain.repository.Score
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 class SaveGameResultUseCase @Inject constructor(private val repository: GameRepository) {
@@ -17,7 +15,6 @@ class SaveGameResultUseCase @Inject constructor(private val repository: GameRepo
     }
 
     private fun getScore(mismatchedTimes : Int, difficulty: Difficulty) : Score {
-        //    TODO("logic not implemented yet")
-        return Score(mismatchedTimes.toDouble())
+        return Score((difficulty.mismatchAllowed - mismatchedTimes).toDouble())
     }
 }

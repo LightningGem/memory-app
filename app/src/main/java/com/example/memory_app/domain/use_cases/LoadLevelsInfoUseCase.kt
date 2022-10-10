@@ -21,8 +21,8 @@ class LoadLevelsInfoUseCase @Inject constructor(private val repository: GameRepo
     private fun predicate(difficulty: Difficulty, levelsCompleted : Int) : Boolean {
         return when (difficulty) {
             Difficulty.EASY -> true
-            Difficulty.MEDIUM -> (levelsCompleted > 10)
-            else -> (levelsCompleted > 20)
+            Difficulty.MEDIUM -> (levelsCompleted >= 10)
+            else -> (levelsCompleted >= 20)
         }
     }
 }

@@ -1,5 +1,14 @@
 <resources>
-    <string name="app_name">memory-app</string>
+    <string name="app_name">Memory Cards</string>
+
+    <string name="levels_completed">Levels completed : %s</string>
+    <string name="average_score">Average score : %s</string>
+
     <string name="number_of_cards">number of cards : %s</string>
     <string name="cards_in_row">cards in row : %s</string>
+
+    <string name="menu_label">Menu</string>
+    <string name="game_label">{levelName}</string>
+    <string name="show_dialog_fragment">Pause</string>
+    <string name="mismatches_left">Mismatches left</string>
 </resources>

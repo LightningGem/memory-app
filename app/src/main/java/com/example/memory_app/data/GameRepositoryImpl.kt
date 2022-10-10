@@ -25,8 +25,7 @@ class GameRepositoryImpl @Inject constructor
 
     override suspend fun updateStatistic(score: Score) {
         val (averageScore, levelsCompleted) = getStatistic().first()
-        val newAverageScore = ((averageScore.value * levelsCompleted) + score.value) /
-                levelsCompleted + 1
+        val newAverageScore = ((averageScore.value * levelsCompleted) + score.value) / (levelsCompleted + 1)
         val newStatistic = Statistic(Score(newAverageScore), levelsCompleted + 1)
         statisticStorage.updateStatistic(newStatistic)
     }

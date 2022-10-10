@@ -9,20 +9,26 @@ interface Game {
 
 class GameImpl(
     private val board: MutableList<Card>,
-    private val cardsInRow: Int
+    private val cardsInRow: Int,
+    private val mismatchAllowed : Int
 ) : Game {
 
     private val previouslySelectedCardsPositions: MutableList<Int> = mutableListOf()
 
-    private var mismatchedTimes : Int = 0
+    private var mismatchesLeft = mismatchAllowed
 
     private var cardsInRowMismatched = false
         set(value) {
-            if (value) mismatchedTimes += 1
+            if (value) {
+                mismatchesLeft -= 1
+            }
             field = value
         }
+    private val loss : Boolean
+        get() = mismatchesLeft == 0
 
-    private fun isGameOver() = board.all { Card -> Card.isFaceUp }
+
+    private fun isGameOver() = board.all { Card -> Card.isFaceUp } || loss
 
     private fun cardIsAlreadyOpen(position: Int): Boolean = board[position].isFaceUp
 
@@ -35,11 +41,12 @@ class GameImpl(
     }
 
 
-    override fun getBoard(): Reaction.Running = Reaction.Running(ImmutableList(board))
+    override fun getBoard(): Reaction.Running = Reaction.Running(ImmutableList(board), mismatchesLeft)
 
     override fun onCardSelected(position: Int): Reaction {
-        if (cardIsAlreadyOpen(position)) return Reaction.OpenItemSelected
+        if (cardIsAlreadyOpen(position) || loss) return Reaction.Nothing
 
+        // previous cards clicked check
         if (cardsInRowMismatched) restartRow{ copy(isFaceUp = false) }
 
         if (previouslySelectedCardsPositions.size == cardsInRow)
@@ -49,12 +56,16 @@ class GameImpl(
             board[previouslySelectedCardsPositions.last()].identifier != board[position].identifier
         ) { cardsInRowMismatched = true }
 
+        // current card clicked save
         board[position] = board[position].copy(isFaceUp = true)
         previouslySelectedCardsPositions.add(position)
 
+        // current card clicked check for game Finish or Loose
         if (isGameOver()) {
+            if(loss) return Reaction.Loss(ImmutableList(board))
+
             restartRow{copy(isMatched = true)}
-            return Reaction.Finished(ImmutableList(board), mismatchedTimes)
+            return Reaction.Finished(ImmutableList(board), mismatchAllowed - mismatchesLeft)
         }
 
         return getBoard()

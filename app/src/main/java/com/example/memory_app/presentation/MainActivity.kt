@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.memory_app.R
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +21,9 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
 
-        setupActionBarWithNavController(navController)
+        val appBarConfiguration = AppBarConfiguration(setOf(R.id.gameFragment, R.id.menuFragment))
+
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
     }
 

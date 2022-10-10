@@ -7,20 +7,44 @@
 
     <fragment
         android:id="@+id/menuFragment"
-        android:name="com.example.memory_app.presentation.menuscreen.MenuFragment"
-        android:label="fragment_menu"
-        tools:layout="@layout/fragment_menu" >
+        android:name="com.example.memory_app.presentation.menuscreen.view.MenuFragment"
+        android:label="@string/menu_label"
+        tools:layout="@layout/fragment_menu">
         <action
             android:id="@+id/action_loadGame"
             app:destination="@id/gameFragment" />
     </fragment>
     <fragment
         android:id="@+id/gameFragment"
-        android:name="com.example.memory_app.presentation.gamescreen.GameFragment"
-        android:label="fragment_game"
-        tools:layout="@layout/fragment_game" >
+        android:name="com.example.memory_app.presentation.gamescreen.view.GameFragment"
+        android:label="@string/game_label"
+        tools:layout="@layout/fragment_game">
         <argument
             android:name="levelName"
             app:argType="string" />
+        <action
+            android:id="@+id/action_ShowDialogFragment"
+            app:destination="@id/gameDialogFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/gameDialogFragment"
+        android:name="com.example.memory_app.presentation.gamescreen.view.GameDialogFragment"
+        android:label="GameDialogFragment" >
+        <argument
+            android:name="levelName"
+            app:argType="string" />
+        <argument
+            android:name="result"
+            app:argType="integer" />
+        <action
+            android:id="@+id/action_BackToMenu"
+            app:destination="@id/menuFragment"
+            app:popUpTo="@id/menuFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_RestartCurentGame"
+            app:destination="@id/gameFragment"
+            app:popUpTo="@id/gameFragment"
+            app:popUpToInclusive="true" />
+    </dialog>
 </navigation>

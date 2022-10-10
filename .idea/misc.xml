@@ -3,13 +3,29 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/face_off_image.xml" value="0.1485" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.152" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/ic_menu.xml" value="0.1575" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/ic_menu_open_black_24dp.xml" value="0.152" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/test_level_card1.xml" value="0.209" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/test_level_card2.xml" value="0.209" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/test_level_card3.xml" value="0.209" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/wtf_level_card1.xml" value="0.1485" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/wtf_level_card2.xml" value="0.1485" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/wtf_level_card3.xml" value="0.1485" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/wtf_level_card4.xml" value="0.1485" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/wtf_level_card5.xml" value="0.121" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/card_view_item.xml" value="0.25416666666666665" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/custom_menu_item.xml" value="0.253125" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/fragment_game.xml" value="0.1" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/fragment_game_dialog.xml" value="0.253125" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/fragment_menu.xml" value="0.25" />
-        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/level_view_item.xml" value="0.1" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/level_view_item.xml" value="0.4" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/mismatches_left_text.xml" value="0.72" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/statistic_view_item.xml" value="0.264" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/menu/game_fragment_menu.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>
