@@ -11,4 +11,9 @@
     <string name="game_label">{levelName}</string>
     <string name="show_dialog_fragment">Pause</string>
     <string name="mismatches_left">Mismatches left</string>
+    <string name="source_type">Source type</string>
+    <string name="retry">Retry</string>
+
+    <string name="local">Local</string>
+    <string name="remote">Remote</string>
 </resources>

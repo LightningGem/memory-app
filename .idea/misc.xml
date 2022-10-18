@@ -8,6 +8,7 @@
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/ic_launcher_foreground.xml" value="0.152" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/ic_menu.xml" value="0.1575" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/ic_menu_open_black_24dp.xml" value="0.152" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/ic_retry.xml" value="0.152" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/test_level_card1.xml" value="0.209" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/test_level_card2.xml" value="0.209" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/drawable/test_level_card3.xml" value="0.209" />
@@ -24,8 +25,13 @@
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/fragment_menu.xml" value="0.25" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/level_view_item.xml" value="0.4" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/mismatches_left_text.xml" value="0.72" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/sourcetype_menu_item.xml" value="0.253125" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/layout/statistic_view_item.xml" value="0.264" />
         <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/menu/game_fragment_menu.xml" value="0.25416666666666665" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/menu/game_fragment_options.xml" value="0.25416666666666665" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/menu/menu_fragment_options.xml" value="0.253125" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.152" />
+        <entry key="..\:/Kotlin/Android_projects/MyGit/memory-app/app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.152" />
       </map>
     </option>
   </component>

@@ -19,7 +19,7 @@ class GameRepositoryImpl @Inject constructor
 
     override fun getLevel(name: String): Level = levelsStorage.getLevel(name)
 
-    override fun getAllLevels(): Flow<List<Level>> = levelsStorage.getAllLevels()
+    override fun getAllLevels(remote : Boolean): Flow<List<Level>> = levelsStorage.getAllLevels(remote)
 
     override fun getStatistic(): Flow<Statistic> = statisticStorage.getStatistic()
 

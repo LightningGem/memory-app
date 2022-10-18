@@ -4,7 +4,7 @@ import kotlinx.coroutines.flow.Flow
 
 interface GameRepository {
     fun getLevel(name : String) : Level
-    fun getAllLevels() : Flow<List<Level>>
+    fun getAllLevels(remote : Boolean) : Flow<List<Level>>
     fun getStatistic() : Flow<Statistic>
     suspend fun updateStatistic(score : Score)
 }

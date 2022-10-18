@@ -1,16 +1,16 @@
 package com.example.memory_app.data.levels
 
 import com.example.memory_app.data.levels.resources.LevelsResourcesHolder
+import com.example.memory_app.data.levels.resources.Resources
 import com.example.memory_app.domain.model.BoardGeneratorImpl
 import com.example.memory_app.domain.model.Difficulty
 import com.example.memory_app.domain.repository.Level
 import com.example.memory_app.presentation.gamescreen.view.CardsAdapter
-import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-class LocalLevelsStorageImpl @Inject constructor(localResources : LevelsResourcesHolder) : LevelsStorage {
-
+class LevelsStorageImpl @Inject constructor
+    (private val resourcesHolder : LevelsResourcesHolder) : LevelsStorage {
     /**
     CardId in View layer would associate with its image like this : imageUris.get(CardId)
     (check [CardsAdapter]). Board generation depends on [Difficulty] and list of CardId`s
@@ -19,16 +19,21 @@ class LocalLevelsStorageImpl @Inject constructor(localResources : LevelsResource
     images we have so each new game of the same [Level] we might get new images if number of
     them is more then NumberOfCards/cardsInRow of current [Difficulty].
      */
-    private val levels = localResources.getAllLevelsResources().mapIndexed {position, resources ->
+    private fun List<Resources>.toListOfLevels() = this.mapIndexed {position, resources ->
         Level( resources.levelName,
-               Difficulty.values()[position % Difficulty.values().size],
-               List(resources.cardImagesUris.size) { index -> index }
+            Difficulty.values()[position % Difficulty.values().size],
+            List(resources.cardImagesUris.size) { index -> index }
         )
     }
 
-    override fun getAllLevels(): Flow<List<Level>> = flow {
-        emit(levels)
-    }
+    private lateinit var levels : List<Level>
 
     override fun getLevel(name: String): Level = levels.first { it.name == name }
+
+    override fun getAllLevels(remote : Boolean): Flow<List<Level>> = flow {
+          resourcesHolder.getAllLevelsResources(remote).collect {
+              levels = it.toListOfLevels()
+              emit(levels)
+          }
+    }
 }

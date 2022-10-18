@@ -75,10 +75,11 @@ class GameFragment : Fragment() {
                 binding.gridRecycleView.adapter = CardsAdapter(
                     onClick = {position : Int ->
                         viewModel.onCardClicked(position) },
-                    levelResources = resources.getLevelResources(viewModel.levelName!!),
+                    levelResources = resources.getLevelResources(viewModel.levelName),
                     numberOfColumns = numberOfColumns,
                     numberOfRows = numberOfRows,
-                    board = newBoard
+                    board = newBoard,
+                    context = requireContext()
                 )
             }
         }
@@ -94,21 +95,7 @@ class GameFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.game_fragment_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when(item.itemId){
-            R.id.menu_item ->  {
-                showDialog(GameDialogFragment.MENU_CLICKED)
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
-    }
-
-    override fun onPrepareOptionsMenu(menu: Menu) {
-        super.onPrepareOptionsMenu(menu)
+        inflater.inflate(R.menu.game_fragment_options, menu)
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
             viewModel.mismatchesLeft.collect {
                 menu.findItem(R.id.mismatches_left_item)
@@ -116,6 +103,16 @@ class GameFragment : Fragment() {
                     .findViewById<TextView>(R.id.mismatches_left)
                     .text = it.toString()
             }
+        }
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId){
+            R.id.dialog_item ->  {
+                showDialog(GameDialogFragment.MENU_CLICKED)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 

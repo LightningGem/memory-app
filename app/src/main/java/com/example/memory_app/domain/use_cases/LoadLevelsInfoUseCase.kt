@@ -10,8 +10,8 @@ class LoadLevelsInfoUseCase @Inject constructor(private val repository: GameRepo
 
     private val statisticFlow = repository.getStatistic()
 
-    operator fun invoke() = statisticFlow.flatMapLatest { statistic ->
-        repository.getAllLevels().map { levels ->
+    operator fun invoke(remote : Boolean) = statisticFlow.flatMapLatest { statistic ->
+        repository.getAllLevels(remote).map { levels ->
             levels
                 .filter { level -> predicate(level.difficulty, statistic.levelsCompleted) }
                 .map { level -> Pair(level.name, level.difficulty) }

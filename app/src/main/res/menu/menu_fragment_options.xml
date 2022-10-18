@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="@string/retry"
+        android:icon="@drawable/ic_retry"
+        app:showAsAction="always"
+        android:id="@+id/retry_item">
+    </item>
+
+    <item
+        android:id="@+id/sourcetype_item"
+        android:title="@string/source_type"
+        app:actionLayout="@layout/sourcetype_menu_item"
+        app:showAsAction="always"/>
+</menu>

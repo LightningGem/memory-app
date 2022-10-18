@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.example.memory_app.R
 import com.example.memory_app.data.levels.resources.LevelsResourcesHolder
 import com.example.memory_app.databinding.LevelViewItemBinding
@@ -32,7 +33,9 @@ class LevelsInfoListAdapter(private val onClick: (String) -> Unit,
             binding.numberOfCardsText.text = context
                     .resources
                     .getString(R.string.number_of_cards, levelInfo.second.NumberOfCards.toString())
-            binding.levelIcon.setImageResource(levelResources.getLevelResources(levelInfo.first).levelIconImageUri)
+            Glide.with(context)
+                .load(levelResources.getLevelResources(levelInfo.first).levelIconImageUri)
+                .into(binding.levelIcon)
         }
     }
 
