@@ -24,6 +24,7 @@ class GameImpl(
             }
             field = value
         }
+
     private val loss : Boolean
         get() = mismatchesLeft == 0
 
@@ -60,7 +61,7 @@ class GameImpl(
         board[position] = board[position].copy(isFaceUp = true)
         previouslySelectedCardsPositions.add(position)
 
-        // current card clicked check for game Finish or Loose
+        // current card clicked check for game Finish or Loss
         if (isGameOver()) {
             if(loss) return Reaction.Loss(ImmutableList(board))
 

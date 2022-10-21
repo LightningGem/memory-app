@@ -15,6 +15,7 @@
        app:cardCornerRadius="20dp">
 
       <ImageView
+          android:padding="5dp"
           android:id="@+id/card_image"
           android:layout_width="match_parent"
           android:layout_height="match_parent"

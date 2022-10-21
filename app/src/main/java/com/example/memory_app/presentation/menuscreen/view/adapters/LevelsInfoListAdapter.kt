@@ -1,12 +1,12 @@
 package com.example.memory_app.presentation.menuscreen.view.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.memory_app.R
 import com.example.memory_app.data.levels.resources.LevelsResourcesHolder
 import com.example.memory_app.databinding.LevelViewItemBinding
@@ -15,9 +15,7 @@ import java.util.*
 
 
 class LevelsInfoListAdapter(private val onClick: (String) -> Unit,
-                            private val levelResources : LevelsResourcesHolder,
-                            private val context : Context
-) :
+                            private val levelResources : LevelsResourcesHolder) :
     ListAdapter<Pair<String, Difficulty>, LevelsInfoListAdapter.LevelViewHolder>(DiffCallback) {
 
     inner class LevelViewHolder(private var binding: LevelViewItemBinding)
@@ -27,14 +25,14 @@ class LevelsInfoListAdapter(private val onClick: (String) -> Unit,
             binding.root.setOnClickListener { onClick(levelInfo.first) }
             binding.levelNameText.text = levelInfo.first
             binding.difficultyText.text = levelInfo.second.name.lowercase(Locale.ROOT)
-            binding.cardsInRowText.text = context
-                    .resources
+            binding.cardsInRowText.text = binding.root.context.resources
                     .getString(R.string.cards_in_row, levelInfo.second.cardsInRow.toString())
-            binding.numberOfCardsText.text = context
-                    .resources
+            binding.numberOfCardsText.text = binding.root.context.resources
                     .getString(R.string.number_of_cards, levelInfo.second.NumberOfCards.toString())
-            Glide.with(context)
+            Glide.with(binding.root)
                 .load(levelResources.getLevelResources(levelInfo.first).levelIconImageUri)
+                .diskCacheStrategy(DiskCacheStrategy.NONE)
+                .placeholder(R.drawable.loading_animation)
                 .into(binding.levelIcon)
         }
     }

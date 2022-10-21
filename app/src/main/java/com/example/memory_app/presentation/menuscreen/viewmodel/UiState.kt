@@ -1,7 +1,6 @@
 package com.example.memory_app.presentation.menuscreen.viewmodel
 
 import com.example.memory_app.domain.model.Difficulty
-import java.lang.Exception
 
 sealed class UiState {
     object Loading : UiState()

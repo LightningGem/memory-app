@@ -70,7 +70,7 @@ class LevelsResourcesHolderImpl @Inject constructor
 
         if(!remote) return flow { emit(localResources) }
         return flow {
-            throw Exception("Not implemented yet!")
+            throw Exception("Not implemented")
             // remoteResources = ...
             // emit(remoteResources)
         }

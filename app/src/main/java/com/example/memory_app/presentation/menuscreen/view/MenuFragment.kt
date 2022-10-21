@@ -47,10 +47,9 @@ class MenuFragment : Fragment() {
         val levelsInfoListAdapter = LevelsInfoListAdapter(
             { levelName -> findNavController()
                 .navigate(MenuFragmentDirections.actionLoadGame(levelName))},
-            resources,
-            requireContext()
+            resources
         )
-        val statisticListAdapter = StatisticListAdapter(requireContext())
+        val statisticListAdapter = StatisticListAdapter()
 
         val concatAdapter = ConcatAdapter(statisticListAdapter, levelsInfoListAdapter)
 

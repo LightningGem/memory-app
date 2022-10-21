@@ -30,8 +30,7 @@ class GameViewModel @Inject constructor
     val mismatchesLeft : StateFlow<Int> = _mismatchesLeft
 
     private val overEventChannel = Channel<Over>()
-    val overEvent = overEventChannel.receiveAsFlow()
-
+    val gameOverEvent = overEventChannel.receiveAsFlow()
 
     fun onCardClicked(position : Int) {
         val reaction = game.onCardSelected(position)
@@ -57,11 +56,22 @@ class GameViewModel @Inject constructor
                 _cardsBoard.value = reaction.cards
                 viewModelScope.launch {
                     val resultScore = saveGameResultUseCase(reaction.mismatchedTimes, levelName)
-                    viewModelScope.launch {
-                        overEventChannel.send(Over.Success(resultScore))
-                    }
+                    overEventChannel.send(Over.Success(resultScore))
                 }
             }
+        }
+    }
+
+    private val _internetErrorState = MutableStateFlow(false)
+    val internetErrorState : StateFlow<Boolean> = _internetErrorState
+
+    private val internetErrorEventChannel = Channel<Boolean>()
+    val internetErrorEvent = internetErrorEventChannel.receiveAsFlow()
+
+    fun onResourceLoadFailed() {
+        if(!_internetErrorState.value) viewModelScope.launch {
+            _internetErrorState.value = true
+            internetErrorEventChannel.send(true)
         }
     }
 }

@@ -29,7 +29,7 @@
     <dialog
         android:id="@+id/gameDialogFragment"
         android:name="com.example.memory_app.presentation.gamescreen.view.GameDialogFragment"
-        android:label="GameDialogFragment" >
+        android:label="@string/game_label" >
         <argument
             android:name="levelName"
             app:argType="string" />

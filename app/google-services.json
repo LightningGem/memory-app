@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "914528073731",
+    "firebase_url": "https://memory-cards-game-app-default-rtdb.firebaseio.com",
+    "project_id": "memory-cards-game-app",
+    "storage_bucket": "memory-cards-game-app.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:914528073731:android:65c99103f87fb756c57636",
+        "android_client_info": {
+          "package_name": "com.example.memory_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "914528073731-iebep7v4hqu6f3g9rl1qcja3mhoqj12r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB3thpLVdQ7dIVWcEPKzr6JMZx-LSVJRSA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "914528073731-iebep7v4hqu6f3g9rl1qcja3mhoqj12r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

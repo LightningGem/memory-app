@@ -1,6 +1,5 @@
 package com.example.memory_app.presentation.menuscreen.view.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,16 +11,19 @@ import com.example.memory_app.databinding.StatisticViewItemBinding
 import com.example.memory_app.domain.repository.Statistic
 
 
-class StatisticListAdapter(private val context : Context) : ListAdapter<Statistic, StatisticListAdapter.LevelViewHolder>(DiffCallback) {
+class StatisticListAdapter() : ListAdapter<Statistic, StatisticListAdapter.LevelViewHolder>(DiffCallback) {
 
     inner class LevelViewHolder(private var binding: StatisticViewItemBinding)
         : RecyclerView.ViewHolder(binding.root){
 
         fun bind(statistic: Statistic) {
-            binding.levelsCompletedText.text =  context.resources.getString(R.string.levels_completed, statistic.levelsCompleted.toString())
+            binding.levelsCompletedText.text =  binding.root.context.resources
+                .getString(R.string.levels_completed, statistic.levelsCompleted.toString())
+
             val score = statistic.averageScore.value
             if(score == 0.0) binding.averageScoreText.visibility = View.GONE
-            else binding.averageScoreText.text = context.resources.getString(R.string.average_score, score.toInt().toString())
+            else binding.averageScoreText.text = binding.root.context.resources
+                .getString(R.string.average_score, score.toInt().toString())
         }
     }
 
