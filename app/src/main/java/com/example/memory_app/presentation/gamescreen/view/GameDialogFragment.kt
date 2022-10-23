@@ -14,7 +14,7 @@ class GameDialogFragment : DialogFragment() {
     companion object {
         const val LOAD_FAIL = -2
         const val MENU_CLICKED = -1
-        const val FAILURE_DIALOG = 0
+        const val LOSE_DIALOG = 0
     }
     private val args: GameDialogFragmentArgs by navArgs()
 
@@ -25,22 +25,23 @@ class GameDialogFragment : DialogFragment() {
         val dialog = AlertDialog.Builder(requireContext())
 
         when(args.result) {
-            LOAD_FAIL -> dialog.setTitle("Cards loading failed")
+            LOAD_FAIL -> dialog.setTitle(R.string.load_error_title)
                 .setIcon(R.drawable.ic_internet_error)
-                .setPositiveButton("Try load again") { _, _ -> restartCurrentGame() }
+                .setPositiveButton(R.string.lose_positive_text) { _, _ -> restartCurrentGame() }
 
-            MENU_CLICKED -> dialog.setTitle("Leaving?")
-                .setPositiveButton("Restart") { _, _ -> restartCurrentGame() }
+            MENU_CLICKED -> dialog.setTitle(R.string.menu_clicked_title)
+                .setPositiveButton(R.string.menu_clicked_positive_text) { _, _ -> restartCurrentGame() }
 
-            FAILURE_DIALOG -> dialog.setTitle("Better try next time")
-                .setPositiveButton("Try again") { _, _ -> restartCurrentGame() }
+            LOSE_DIALOG -> dialog.setTitle(R.string.lose_title)
+                .setPositiveButton(R.string.lose_positive_text) { _, _ -> restartCurrentGame() }
 
-            else -> { dialog.setTitle("Well done!")
-                    .setMessage("Score : ${args.result}")
-                    .setPositiveButton("Play again") { _, _ -> restartCurrentGame() }
+            else -> { dialog.setTitle(R.string.success_title)
+                .setIcon(R.drawable.ic_success)
+                .setMessage(getString(R.string.result_score, args.result.toString()))
+                .setPositiveButton(R.string.success_positive_text) { _, _ -> restartCurrentGame() }
             }
         }
-        return dialog.setNegativeButton("Back to menu") { _, _ -> navigateToMenu() }.create()
+        return dialog.setNegativeButton(R.string.return_to_menu_text) { _, _ -> navigateToMenu() }.create()
     }
 
     private fun restartCurrentGame() {

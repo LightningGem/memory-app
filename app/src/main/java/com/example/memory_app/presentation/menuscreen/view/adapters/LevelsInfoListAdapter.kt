@@ -1,5 +1,6 @@
 package com.example.memory_app.presentation.menuscreen.view.adapters
 
+import android.content.ContentResolver
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
@@ -7,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
 import com.example.memory_app.R
 import com.example.memory_app.data.levels.resources.LevelsResourcesHolder
 import com.example.memory_app.databinding.LevelViewItemBinding
@@ -19,7 +21,7 @@ class LevelsInfoListAdapter(private val onClick: (String) -> Unit,
     ListAdapter<Pair<String, Difficulty>, LevelsInfoListAdapter.LevelViewHolder>(DiffCallback) {
 
     inner class LevelViewHolder(private var binding: LevelViewItemBinding)
-        : RecyclerView.ViewHolder(binding.root){
+        : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(levelInfo: Pair<String, Difficulty>) {
             binding.root.setOnClickListener { onClick(levelInfo.first) }
@@ -29,10 +31,17 @@ class LevelsInfoListAdapter(private val onClick: (String) -> Unit,
                     .getString(R.string.cards_in_row, levelInfo.second.cardsInRow.toString())
             binding.numberOfCardsText.text = binding.root.context.resources
                     .getString(R.string.number_of_cards, levelInfo.second.NumberOfCards.toString())
-            Glide.with(binding.root)
-                .load(levelResources.getLevelResources(levelInfo.first).levelIconImageUri)
-                .diskCacheStrategy(DiskCacheStrategy.NONE)
+
+
+            val imageUri = levelResources.getLevelResources(levelInfo.first).levelIconImageUri
+            val isLocalResource = imageUri.toString().startsWith(ContentResolver.SCHEME_ANDROID_RESOURCE)
+            val options = if (isLocalResource) RequestOptions()
+            else RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA)
                 .placeholder(R.drawable.loading_animation)
+
+            Glide.with(binding.root)
+                .load(imageUri)
+                .apply(options)
                 .into(binding.levelIcon)
         }
     }

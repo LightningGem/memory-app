@@ -12,6 +12,7 @@
         tools:context=".presentation.gamescreen.view.GameFragment">
 
         <androidx.recyclerview.widget.RecyclerView
+            android:splitMotionEvents="false"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:id="@+id/grid_recycle_view"

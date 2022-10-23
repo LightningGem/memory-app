@@ -16,8 +16,8 @@ class MenuViewModel @Inject constructor
     (loadStatisticUseCase: LoadStatisticUseCase,
      private val loadLevelsInfoUseCase: LoadLevelsInfoUseCase) : ViewModel() {
 
-    private val _levelsInfoState : MutableStateFlow<UiState> = MutableStateFlow(UiState.Loading)
-    val levelsInfoState : StateFlow<UiState> = _levelsInfoState
+    private val _levelsInfoState : MutableStateFlow<InfoState> = MutableStateFlow(InfoState.Loading)
+    val levelsInfoState : StateFlow<InfoState> = _levelsInfoState
 
     private val _isRemoteSource = MutableStateFlow(false)
     val isRemoteSource : StateFlow<Boolean> = _isRemoteSource
@@ -29,22 +29,18 @@ class MenuViewModel @Inject constructor
     )
 
     private fun getLevelsStream() = viewModelScope.launch {
-        if(_isRemoteSource.value) _levelsInfoState.value = UiState.Loading
+        if(_isRemoteSource.value) _levelsInfoState.value = InfoState.Loading
         loadLevelsInfoUseCase(remote = _isRemoteSource.value)
-                .catch { _levelsInfoState.value = UiState.Error(it) }
-                .collect { _levelsInfoState.value = UiState.Success(it) }
+                .catch { _levelsInfoState.value = InfoState.Error(it) }
+                .collect { _levelsInfoState.value = InfoState.Success(it) }
     }
 
     private var stream = getLevelsStream()
-
-
-    fun retry() {
-        stream.cancel()
-        stream = getLevelsStream()
-    }
 
     fun changeLevelsSource() {
         _isRemoteSource.value = !_isRemoteSource.value
         retry()
     }
+
+    fun retry() { stream = getLevelsStream().also { stream.cancel() } }
 }

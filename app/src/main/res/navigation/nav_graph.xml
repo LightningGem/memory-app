@@ -38,9 +38,7 @@
             app:argType="integer" />
         <action
             android:id="@+id/action_BackToMenu"
-            app:destination="@id/menuFragment"
-            app:popUpTo="@id/menuFragment"
-            app:popUpToInclusive="true" />
+            app:popUpTo="@id/menuFragment" />
         <action
             android:id="@+id/action_RestartCurentGame"
             app:destination="@id/gameFragment"

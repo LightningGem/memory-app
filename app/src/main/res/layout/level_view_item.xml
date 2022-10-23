@@ -19,7 +19,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            tools:src="@drawable/test_level_icon" />
+            tools:src = "@drawable/face_off_image" />
 
         <LinearLayout
             android:layout_gravity="center"
@@ -68,7 +68,7 @@
                 android:textSize="18sp"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
                 android:textColor="@color/primaryColor"
-                tools:text="medium" />
+                tools:text="easy" />
         </LinearLayout>
 
     </LinearLayout>

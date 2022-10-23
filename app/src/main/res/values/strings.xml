@@ -7,6 +7,21 @@
     <string name="number_of_cards">number of cards : %s</string>
     <string name="cards_in_row">cards in row : %s</string>
 
+    <string name="result_score">Score : %s</string>
+    <string name="success_title">Well done!</string>
+    <string name="success_positive_text">Play again</string>
+
+    <string name="lose_title">Game Over</string>
+    <string name="lose_positive_text">Try again</string>
+
+    <string name="load_error_title">Cards loading failed</string>
+    <string name="load_error_positive_text">Try load again</string>
+
+    <string name="menu_clicked_title">Leaving?</string>
+    <string name="menu_clicked_positive_text">Restart</string>
+
+    <string name="return_to_menu_text">Back to menu</string>
+
     <string name="menu_label">Menu</string>
     <string name="game_label">{levelName}</string>
     <string name="show_dialog_fragment">Pause</string>

@@ -33,7 +33,7 @@ class CardsAdapter(private val onClick: (Int) -> Unit,
         const val marginSize : Int = 20
         const val imageAlpha : Int = 60
     }
-    
+
     inner class LevelViewHolder(private var binding: CardViewItemBinding,
                                 private val cardSideLength : Int,
                                 private val marginTop: Int) :
@@ -66,10 +66,9 @@ class CardsAdapter(private val onClick: (Int) -> Unit,
             }
 
             fun setupImage(imageUri : Uri) {
-                val isLocalResource = imageUri.toString().startsWith(ContentResolver.SCHEME_ANDROID_RESOURCE)
-                val options = if (isLocalResource) RequestOptions()
-                else RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA)
-                    .placeholder(R.drawable.loading_animation)
+                val isLocalResource = isLocalResource(imageUri)
+                val options = if (isLocalResource) RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE)
+                else RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA).placeholder(R.drawable.loading_animation)
 
                 Glide.with(gameFragment)
                     .load(imageUri)
@@ -104,5 +103,18 @@ class CardsAdapter(private val onClick: (Int) -> Unit,
     override fun onBindViewHolder(holder: LevelViewHolder, position: Int) {
         val card = board[position]
         holder.bind(position, card)
+    }
+
+    private fun isLocalResource(uri: Uri) : Boolean = uri.toString().startsWith(ContentResolver.SCHEME_ANDROID_RESOURCE)
+
+    init {
+        for(resource in levelResources.cardImagesUris) {
+            if(!isLocalResource(resource)) Glide
+                .with(gameFragment)
+                .load(resource)
+                .diskCacheStrategy(DiskCacheStrategy.DATA)
+                .onlyRetrieveFromCache(retrieveFromCache)
+                .preload()
+        }
     }
 }

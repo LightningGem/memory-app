@@ -2,8 +2,7 @@ package com.example.memory_app.presentation.menuscreen.view
 
 import android.os.Bundle
 import android.view.*
-import android.widget.TextView
-import android.widget.Toast
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
@@ -16,7 +15,7 @@ import com.example.memory_app.databinding.FragmentMenuBinding
 import com.example.memory_app.presentation.menuscreen.view.adapters.LevelsInfoListAdapter
 import com.example.memory_app.presentation.menuscreen.view.adapters.StatisticListAdapter
 import com.example.memory_app.presentation.menuscreen.viewmodel.MenuViewModel
-import com.example.memory_app.presentation.menuscreen.viewmodel.UiState
+import com.example.memory_app.presentation.menuscreen.viewmodel.InfoState
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -32,7 +31,6 @@ class MenuFragment : Fragment() {
 
     private val menuViewModel: MenuViewModel by viewModels()
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -44,13 +42,14 @@ class MenuFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val levelsInfoListAdapter = LevelsInfoListAdapter(
-            { levelName -> findNavController()
-                .navigate(MenuFragmentDirections.actionLoadGame(levelName))},
-            resources
+            onClick = { levelName -> findNavController()
+                .navigate(MenuFragmentDirections.actionLoadGame(levelName))
+            },
+            levelResources = resources
         )
         val statisticListAdapter = StatisticListAdapter()
-
         val concatAdapter = ConcatAdapter(statisticListAdapter, levelsInfoListAdapter)
 
         binding.levelsRecycleView.apply {
@@ -58,24 +57,36 @@ class MenuFragment : Fragment() {
             adapter = concatAdapter
         }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            menuViewModel.levelsInfoState.collect {
-                when(it) {
-                    is UiState.Loading -> {
+        with(viewLifecycleOwner.lifecycleScope) {
+            launchWhenStarted {
+                menuViewModel.levelsInfoState.collect {
+                    when (it) {
+                        is InfoState.Loading -> {
+                            binding.progressBar.visibility = View.VISIBLE
+                            binding.errorImage.visibility = View.GONE
+                            levelsInfoListAdapter.submitList(listOf())
+                        }
 
+                        is InfoState.Error -> {
+                            binding.progressBar.visibility = View.GONE
+                            binding.errorImage.visibility = View.VISIBLE
+                            levelsInfoListAdapter.submitList(listOf())
+
+                        }
+
+                        is InfoState.Success -> {
+                            binding.progressBar.visibility = View.GONE
+                            binding.errorImage.visibility = View.GONE
+                            levelsInfoListAdapter.submitList(it.levelsInfo)
+                        }
                     }
-                    is UiState.Error -> {
-                    Toast.makeText(requireContext(), "${it.throwable}", Toast.LENGTH_SHORT).show()
-                        levelsInfoListAdapter.submitList(listOf())
-                    }
-                    is UiState.Success -> { levelsInfoListAdapter.submitList(it.levelsInfo) }
                 }
             }
-        }
 
-        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
-            menuViewModel.statistic.collect {
-                if (it != null) statisticListAdapter.submitList(listOf(it))
+            launchWhenStarted {
+                menuViewModel.statistic.collect {
+                    if (it != null) statisticListAdapter.submitList(listOf(it))
+                }
             }
         }
     }
@@ -90,13 +101,13 @@ class MenuFragment : Fragment() {
                 if(isRemote) {
                     menu.findItem(R.id.retry_item).isVisible = true
                     menu.findItem(R.id.sourcetype_item).actionView
-                        .findViewById<TextView>(R.id.sourse_type)
-                        .text = getString(R.string.local)
+                        .findViewById<ImageView>(R.id.sourse_type)
+                        .setImageResource(R.drawable.local)
                 } else {
                     menu.findItem(R.id.retry_item).isVisible = false
                     menu.findItem(R.id.sourcetype_item).actionView
-                        .findViewById<TextView>(R.id.sourse_type)
-                        .text = getString(R.string.remote)
+                        .findViewById<ImageView>(R.id.sourse_type)
+                        .setImageResource(R.drawable.cloud)
                 }
 
             }

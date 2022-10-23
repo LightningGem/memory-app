@@ -19,9 +19,9 @@ class LevelsStorageImpl @Inject constructor
     images we have so each new game of the same [Level] we might get new images if number of
     them is more then NumberOfCards/cardsInRow of current [Difficulty].
      */
-    private fun List<Resources>.toListOfLevels() = this.mapIndexed {position, resources ->
+    private fun List<Resources>.toListOfLevels() = this.map { resources ->
         Level( resources.levelName,
-            Difficulty.values()[position % Difficulty.values().size],
+            Difficulty.values()[resources.difficulty],
             List(resources.cardImagesUris.size) { index -> index }
         )
     }

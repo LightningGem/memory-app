@@ -85,7 +85,7 @@ class GameFragment : Fragment() {
             launchWhenResumed {
                 viewModel.gameOverEvent.collect() {
                     when (it) {
-                        is Over.Failure -> { showDialog(GameDialogFragment.FAILURE_DIALOG) }
+                        is Over.Failure -> { showDialog(GameDialogFragment.LOSE_DIALOG) }
                         is Over.Success -> { showDialog(it.score.value.toInt()) }
                     }
                 }
@@ -127,12 +127,15 @@ class GameFragment : Fragment() {
     private fun showDialog(result : Int) {
         // If user open dialog Fragment from options menu or back press then
         // we need to hide it to display again. Otherwise exception occur.
-        try { findNavController()
+        try {
+            findNavController()
             .navigate(GameFragmentDirections.actionShowDialogFragment(viewModel.levelName, result))
         }
         catch (e : Exception) {
+            if(result == GameDialogFragment.LOAD_FAIL) {
             findNavController().navigateUp()
             showDialog(result)
+            }
         }
     }
 }

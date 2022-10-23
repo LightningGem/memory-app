@@ -22,7 +22,6 @@ class GameViewModel @Inject constructor
     val levelName = savedStateHandle.get<String>("levelName")!!
     private val game = loadLevelUseCase(levelName)
 
-
     private val _cardsBoard = MutableStateFlow(game.getBoard().cards)
     val cardsBoard : StateFlow<List<Card>> = _cardsBoard
 

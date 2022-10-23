@@ -7,15 +7,12 @@
     android:layout_height="wrap_content"
     android:clipToPadding="false"
     android:focusable="true">
-    <TextView
-        android:textColor="@color/primaryTextColor"
+    <ImageView
+        android:src="@drawable/local"
         android:id="@+id/sourse_type"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
         android:layout_gravity="center"
         tools:text="@string/local"
-        android:textStyle="normal"
-        android:textSize="14sp"
-        style="@style/TextAppearance.AppCompat.Button"
         />
 </FrameLayout>
