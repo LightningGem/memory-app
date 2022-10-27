@@ -36,7 +36,7 @@ class GameDialogFragment : DialogFragment() {
                 .setPositiveButton(R.string.lose_positive_text) { _, _ -> restartCurrentGame() }
 
             else -> { dialog.setTitle(R.string.success_title)
-                .setIcon(R.drawable.ic_success)
+                .setIcon(R.drawable.ic_success1)
                 .setMessage(getString(R.string.result_score, args.result.toString()))
                 .setPositiveButton(R.string.success_positive_text) { _, _ -> restartCurrentGame() }
             }

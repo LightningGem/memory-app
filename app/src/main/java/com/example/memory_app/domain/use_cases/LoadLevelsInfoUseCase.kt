@@ -1,12 +1,16 @@
 package com.example.memory_app.domain.use_cases
 
+import android.content.Context
+import com.example.memory_app.R
 import com.example.memory_app.domain.model.Difficulty
 import com.example.memory_app.domain.repository.GameRepository
+import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class LoadLevelsInfoUseCase @Inject constructor(private val repository: GameRepository) {
+class LoadLevelsInfoUseCase @Inject constructor
+    (private val repository: GameRepository, @ApplicationContext private val context: Context) {
 
     private val statisticFlow = repository.getStatistic()
 
@@ -21,8 +25,8 @@ class LoadLevelsInfoUseCase @Inject constructor(private val repository: GameRepo
     private fun predicate(difficulty: Difficulty, levelsCompleted : Int) : Boolean {
         return when (difficulty) {
             Difficulty.EASY -> true
-            Difficulty.MEDIUM -> (levelsCompleted >= 10)
-            else -> (levelsCompleted >= 20)
+            Difficulty.MEDIUM -> (levelsCompleted >= context.resources.getInteger(R.integer.medium))
+            Difficulty.HARD -> (levelsCompleted >= context.resources.getInteger(R.integer.hard))
         }
     }
 }

@@ -85,7 +85,7 @@ class MenuFragment : Fragment() {
 
             launchWhenStarted {
                 menuViewModel.statistic.collect {
-                    if (it != null) statisticListAdapter.submitList(listOf(it))
+                    if (it != null && it.levelsCompleted != 0) statisticListAdapter.submitList(listOf(it))
                 }
             }
         }

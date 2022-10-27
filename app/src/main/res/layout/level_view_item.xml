@@ -19,7 +19,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            tools:src = "@drawable/face_off_image" />
+            tools:src = "@drawable/sport_icon" />
 
         <LinearLayout
             android:layout_gravity="center"
@@ -65,9 +65,8 @@
                 android:id="@+id/difficulty_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:textSize="20sp"
                 style="@style/TextAppearance.MaterialComponents.Headline6"
-                android:textColor="@color/primaryColor"
                 tools:text="easy" />
         </LinearLayout>
 

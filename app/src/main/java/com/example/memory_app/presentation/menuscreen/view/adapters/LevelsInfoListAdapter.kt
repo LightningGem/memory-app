@@ -24,20 +24,26 @@ class LevelsInfoListAdapter(private val onClick: (String) -> Unit,
         : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(levelInfo: Pair<String, Difficulty>) {
-            binding.root.setOnClickListener { onClick(levelInfo.first) }
-            binding.levelNameText.text = levelInfo.first
-            binding.difficultyText.text = levelInfo.second.name.lowercase(Locale.ROOT)
-            binding.cardsInRowText.text = binding.root.context.resources
+            with(binding){
+                root.setOnClickListener { onClick(levelInfo.first) }
+                levelNameText.text = levelInfo.first
+                difficultyText.text = levelInfo.second.name.lowercase().capitalize()
+                val difficultyColor = when (levelInfo.second) {
+                    Difficulty.EASY -> root.context.getColor(R.color.difficulty0Color)
+                    Difficulty.MEDIUM -> root.context.getColor(R.color.difficulty1Color)
+                    Difficulty.HARD -> root.context.getColor(R.color.difficulty2Color)
+                }
+                difficultyText.setTextColor(difficultyColor)
+                cardsInRowText.text = binding.root.context.resources
                     .getString(R.string.cards_in_row, levelInfo.second.cardsInRow.toString())
-            binding.numberOfCardsText.text = binding.root.context.resources
+                numberOfCardsText.text = binding.root.context.resources
                     .getString(R.string.number_of_cards, levelInfo.second.NumberOfCards.toString())
-
+            }
 
             val imageUri = levelResources.getLevelResources(levelInfo.first).levelIconImageUri
             val isLocalResource = imageUri.toString().startsWith(ContentResolver.SCHEME_ANDROID_RESOURCE)
-            val options = if (isLocalResource) RequestOptions()
-            else RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA)
-                .placeholder(R.drawable.loading_animation)
+            val options = if (isLocalResource) RequestOptions().diskCacheStrategy(DiskCacheStrategy.NONE)
+            else RequestOptions().diskCacheStrategy(DiskCacheStrategy.DATA).placeholder(R.drawable.loading_animation)
 
             Glide.with(binding.root)
                 .load(imageUri)

@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Memory Cards</string>
 
-    <string name="levels_completed">Levels completed : %s</string>
+    <string name="levels_completed">%s</string>
     <string name="average_score">Average score : %s</string>
 
     <string name="number_of_cards">number of cards : %s</string>
@@ -31,4 +31,6 @@
 
     <string name="local">Local</string>
     <string name="remote">Remote</string>
+    <string name="medium_req">: win at least 10 times to unlock</string>
+    <string name="hard_req">: win at least 20 times to unlock</string>
 </resources>
