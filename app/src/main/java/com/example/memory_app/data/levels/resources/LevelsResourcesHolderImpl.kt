@@ -39,19 +39,6 @@ class LevelsResourcesHolderImpl @Inject constructor
 
     private val localResources : List<Resources> = listOf(
         Resources(
-            levelName = "Sport",
-            difficulty = 0,
-            cardImagesUris = listOf(
-                R.drawable.sport_card1,
-                R.drawable.sport_card2,
-                R.drawable.sport_card3,
-                R.drawable.sport_card4,
-                R.drawable.sport_card5
-            ).map { context.resourceUri(it) },
-            faceOffImageUri = context.resourceUri(R.drawable.sport_face_off_image),
-            levelIconImageUri = context.resourceUri(R.drawable.sport_icon)
-        ),
-        Resources(
             levelName = "Pets",
             difficulty = 0,
             cardImagesUris = listOf(
@@ -60,9 +47,25 @@ class LevelsResourcesHolderImpl @Inject constructor
                 R.drawable.pets_card3,
                 R.drawable.pets_card4,
                 R.drawable.pets_card5,
+                R.drawable.pets_card6,
             ).map { context.resourceUri(it) },
             faceOffImageUri = context.resourceUri(R.drawable.pets_face_off_image),
             levelIconImageUri = context.resourceUri(R.drawable.pets_icon)
+        ),
+        Resources(
+            levelName = "Health",
+            difficulty = 1,
+            cardImagesUris = listOf(
+                R.drawable.health_card1,
+                R.drawable.health_card2,
+                R.drawable.health_card3,
+                R.drawable.health_card4,
+                R.drawable.health_card5,
+                R.drawable.health_card6,
+                R.drawable.health_card7,
+            ).map { context.resourceUri(it) },
+            faceOffImageUri = context.resourceUri(R.drawable.health_face_off_image),
+            levelIconImageUri = context.resourceUri(R.drawable.health_icon)
         ),
         Resources(
             levelName = "Nature",
@@ -75,6 +78,10 @@ class LevelsResourcesHolderImpl @Inject constructor
                 R.drawable.nature_card5,
                 R.drawable.nature_card6,
                 R.drawable.nature_card7,
+                R.drawable.nature_card8,
+                R.drawable.nature_card9,
+                R.drawable.nature_card10,
+                R.drawable.nature_card11,
             ).map { context.resourceUri(it) },
             faceOffImageUri = context.resourceUri(R.drawable.nature_face_off_image),
             levelIconImageUri = context.resourceUri(R.drawable.nature_icon)

@@ -17,8 +17,7 @@ Simple Memory Cards Game app using MVVM-Clean Architecture.
 ## Screenshots
 <p align="center">
 <img src="docs/Screenshot_1.png" height="500"/> <img src="docs/Screenshot_2.png" height="500"/> <img src="docs/Screenshot_3.png" height="500"/> 
-<img src="docs/Screenshot_4.png" height="500"/> <img src="docs/Screenshot_5.png" height="500"/>
-<img src="docs/Screenshot_6.png" height="500"/>
+<img src="docs/Screenshot_4.png" height="500"/> <img src="docs/Screenshot_5.png" height="500"/> <img src="docs/Screenshot_6.png" height="500"/> 
 </p>
 
 ## Credits
