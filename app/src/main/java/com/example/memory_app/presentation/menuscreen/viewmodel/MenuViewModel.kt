@@ -6,6 +6,7 @@ import com.example.memory_app.domain.repository.Statistic
 import com.example.memory_app.domain.use_cases.LoadLevelsInfoUseCase
 import com.example.memory_app.domain.use_cases.LoadStatisticUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.flow.SharingStarted.Companion.WhileSubscribed
 import kotlinx.coroutines.launch
@@ -42,5 +43,5 @@ class MenuViewModel @Inject constructor
         retry()
     }
 
-    fun retry() { stream = getLevelsStream().also { stream.cancel() } }
+    fun retry() { stream.cancel().also { stream = getLevelsStream() } }
 }

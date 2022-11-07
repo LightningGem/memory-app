@@ -19,7 +19,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:scaleType="fitXY"
-            tools:src = "@drawable/sport_icon" />
+            tools:src = "@drawable/pets_icon" />
 
         <LinearLayout
             android:layout_gravity="center"
@@ -42,7 +42,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
                 android:textSize="15sp"
-                tools:text="number of cards : 999"
+                tools:text="number of cards : 8"
                  />
 
             <TextView

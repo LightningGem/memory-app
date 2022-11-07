@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
-    app:cardElevation="2dp"
+    app:cardElevation="3dp"
     app:cardCornerRadius="20dp"
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -41,12 +41,14 @@
             app:layout_constraintStart_toEndOf="@id/icon" />
 
         <TextView
-            android:layout_marginEnd="10dp"
             android:id="@+id/average_score_text"
+            android:textStyle="bold"
+            android:textColor="@color/secondaryDarkColor"
+            android:layout_marginEnd="10dp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
             android:textSize="20sp"
-            tools:text="Average Score : 13"
+            tools:text="Average Score : 5.5"
             style="@style/TextAppearance.MaterialComponents.Headline5"
             app:layout_constraintTop_toTopOf="@id/levels_completed_text"
             app:layout_constraintBottom_toBottomOf="@id/levels_completed_text"
@@ -126,7 +128,8 @@
             app:layout_constraintTop_toTopOf="@id/desc2_img"
             app:layout_constraintStart_toEndOf="@id/desc2_text"
             app:layout_constraintBottom_toBottomOf="@id/desc2_img"
-            style="@style/TextAppearance.MaterialComponents.Headline4"
+            style="@style/TextAppearance.MaterialComponents.Headline5"
+            android:textStyle="bold"
             android:text="@string/medium_req" />
 
 
@@ -163,7 +166,8 @@
             app:layout_constraintTop_toTopOf="@id/desc3_img"
             app:layout_constraintStart_toEndOf="@id/desc3_text"
             app:layout_constraintBottom_toBottomOf="@id/desc3_img"
-            style="@style/TextAppearance.MaterialComponents.Headline4"
+            style="@style/TextAppearance.MaterialComponents.Headline5"
+            android:textStyle="bold"
             android:text="@string/hard_req" />
 
         <ImageView

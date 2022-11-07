@@ -1,13 +1,20 @@
 package com.example.memory_app.presentation.gamescreen.view
 
-import android.app.AlertDialog
 import android.app.Dialog
+import android.graphics.Typeface
 import android.os.Bundle
+import android.view.Gravity
+import android.widget.LinearLayout
+import android.widget.TextView
+import androidx.core.widget.TextViewCompat
+import androidx.core.widget.TextViewCompat.setTextAppearance
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.memory_app.R
+import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class GameDialogFragment : DialogFragment() {
@@ -22,7 +29,7 @@ class GameDialogFragment : DialogFragment() {
 
         this.isCancelable = args.result == MENU_CLICKED
 
-        val dialog = AlertDialog.Builder(requireContext())
+        val dialog = MaterialAlertDialogBuilder(requireContext())
 
         when(args.result) {
             LOAD_FAIL -> dialog.setTitle(R.string.load_error_title)
@@ -35,9 +42,21 @@ class GameDialogFragment : DialogFragment() {
             LOSE_DIALOG -> dialog.setTitle(R.string.lose_title)
                 .setPositiveButton(R.string.lose_positive_text) { _, _ -> restartCurrentGame() }
 
-            else -> { dialog.setTitle(R.string.success_title)
-                .setIcon(R.drawable.ic_success1)
-                .setMessage(getString(R.string.result_score, args.result.toString()))
+            else -> {
+                val dialogTextLayout = LinearLayout(requireContext())
+                dialogTextLayout.orientation = LinearLayout.VERTICAL
+                val text_view = TextView(requireContext())
+                with(text_view){
+                    text = getString(R.string.result_score, args.result.toString())
+                    setPadding(0, 45, 0, 0)
+                    gravity = Gravity.CENTER_HORIZONTAL
+                    setTextAppearance(this, R.style.MaterialAlertDialog_App_Body_Text);
+                }
+                dialogTextLayout.addView(text_view)
+
+                dialog.setTitle(R.string.success_title)
+                .setIcon(R.drawable.ic_success0)
+                .setView(dialogTextLayout)
                 .setPositiveButton(R.string.success_positive_text) { _, _ -> restartCurrentGame() }
             }
         }

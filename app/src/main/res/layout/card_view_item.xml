@@ -21,6 +21,6 @@
           android:layout_height="match_parent"
           android:background="@android:color/white"
           android:scaleType="fitXY"
-          tools:srcCompat="@drawable/face_off_image" />
+          tools:srcCompat="@drawable/pets_face_off_image" />
    </androidx.cardview.widget.CardView>
 </LinearLayout>

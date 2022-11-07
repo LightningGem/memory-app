@@ -13,6 +13,8 @@ class GameImpl(
     private val mismatchAllowed : Int
 ) : Game {
 
+    init { require(board.size % cardsInRow == 0) }
+
     private val previouslySelectedCardsPositions: MutableList<Int> = mutableListOf()
 
     private var mismatchesLeft = mismatchAllowed

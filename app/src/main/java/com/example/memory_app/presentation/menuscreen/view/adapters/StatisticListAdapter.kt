@@ -22,7 +22,7 @@ class StatisticListAdapter() : ListAdapter<Statistic, StatisticListAdapter.Level
 
             val score = statistic.averageScore.value
             binding.averageScoreText.text = binding.root.context.resources
-                .getString(R.string.average_score, score.toInt().toString())
+                .getString(R.string.average_score, String.format("%.1f", score).replace(",", "."))
 
             val res : Pair<Int, Int>;
             with(binding.root.context) {

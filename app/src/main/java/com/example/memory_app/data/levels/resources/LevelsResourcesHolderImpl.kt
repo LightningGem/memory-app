@@ -5,12 +5,17 @@ import android.content.Context
 import android.net.Uri
 import androidx.core.net.toUri
 import com.example.memory_app.R
+import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.suspendCancellableCoroutine
+import kotlinx.coroutines.tasks.asDeferred
+import kotlinx.coroutines.tasks.await
+import java.lang.Exception
 import javax.inject.Inject
 import javax.inject.Singleton
 import kotlin.coroutines.resume
@@ -94,29 +99,31 @@ class LevelsResourcesHolderImpl @Inject constructor
         try { localResources.first { it.levelName == levelName} }
         catch (e : NoSuchElementException) { remoteResources.first { it.levelName == levelName} }
 
-
     override fun getAllLevelsResources(remote : Boolean) : Flow<List<Resources>> {
         if(!remote) return flow { emit(localResources) }
         return flow {
-            val result = suspendCoroutine { continuation ->
-                val resources = mutableListOf<Resources>()
-                Firebase.firestore.collection(COLLECTION_PATH).get(Source.SERVER)
-                    .addOnSuccessListener { documents -> documents.forEach { document ->
-                        resources.add(Resources(
-                            levelName = document.id,
-                            difficulty = document.getDouble(KEY_DIFFICULTY)!!.toInt(),
-                            cardImagesUris = (document.get(KEY_CARDS_URIS)
-                                    as List<String>).map { it.toUri() },
-                            faceOffImageUri = document.getString(KEY_FACE_OFF_URI)!!.toUri(),
-                            levelIconImageUri = document.getString(KEY_ICON_URI)!!.toUri() ))
-                        }
-                        remoteResources = resources.sortedBy { it.difficulty }
-                        continuation.resume(remoteResources)
-                    }
-                    .addOnFailureListener { continuation.resume(it) }
-            }
+            val resources = mutableListOf<Resources>()
+            var result : List<Resources>? = null
+            var exception : Exception? = null
 
-            if(result is Exception) throw result else emit(result as List<Resources>)
+            Firebase.firestore.collection(COLLECTION_PATH)
+                .get(Source.SERVER)
+                .addOnSuccessListener { documents -> documents.forEach { document ->
+                    resources.add(Resources(
+                        levelName = document.id,
+                        difficulty = document.getDouble(KEY_DIFFICULTY)!!.toInt(),
+                        cardImagesUris = (document.get(KEY_CARDS_URIS)
+                                as List<String>).map { it.toUri() },
+                        faceOffImageUri = document.getString(KEY_FACE_OFF_URI)!!.toUri(),
+                        levelIconImageUri = document.getString(KEY_ICON_URI)!!.toUri() ))
+                }
+                    result = resources.sortedBy { it.difficulty }
+                }
+                .addOnFailureListener { exception = it }
+                .await()
+
+            remoteResources = result ?: throw exception!!
+            emit(remoteResources)
         }
     }
 
