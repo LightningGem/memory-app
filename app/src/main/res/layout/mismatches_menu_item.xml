@@ -8,7 +8,7 @@
     android:clipToPadding="false"
     android:focusable="true">
     <TextView
-        android:textColor="@color/primaryTextColor"
+        android:textColor="?attr/colorOnPrimary"
         android:id="@+id/mismatches_left"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"

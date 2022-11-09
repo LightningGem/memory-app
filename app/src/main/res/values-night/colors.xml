@@ -3,13 +3,13 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
-    <color name="primaryColor">#9575cd</color>
-    <color name="primaryDarkColor">#65499c</color>
-    <color name="primaryLightColor">@color/black</color>
+    <color name="primaryColor">#252525</color>
+    <color name="primaryDarkColor">#EA4444</color>
+    <color name="primaryLightColor">@color/white</color>
 
     <color name="secondaryColor">#A0A0A0</color>
-    <color name="secondaryDarkColor">#555555</color>
-    <color name="secondaryLightColor">@color/white</color>
+    <color name="secondaryDarkColor">@color/white</color>
+    <color name="secondaryLightColor">#1F1F1F</color>
 
     <color name="difficulty0Color">#00CC66</color>
     <color name="difficulty1Color">#FF9933</color>

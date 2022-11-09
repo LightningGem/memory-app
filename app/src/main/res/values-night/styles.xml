@@ -1,27 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="mediumComp" parent="ShapeAppearance.Material3.MediumComponent">
+    <style name="mediumCompNight" parent="ShapeAppearance.Material3.MediumComponent">
         <item name="cornerFamily">rounded</item>
         <item name="cornerSize">15dp</item>
     </style>
-    <style name="dialogStyle" parent="MaterialAlertDialog.Material3">
+    <style name="dialogStyleNight" parent="MaterialAlertDialog.Material3">
         <item name="shapeAppearance">@style/mediumComp</item>
         <item name="shapeAppearanceOverlay">@null</item>
     </style>
 
-    <style name="TitleText" parent="MaterialAlertDialog.Material3.Title.Text">
+    <style name="TitleTextNight" parent="MaterialAlertDialog.Material3.Title.Text">
         <item name="android:textColor">@color/primaryLightColor</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">20sp</item>
     </style>
 
-    <style name="BodyText" parent="MaterialAlertDialog.Material3.Body.Text">
+    <style name="BodyTextNight" parent="MaterialAlertDialog.Material3.Body.Text">
         <item name="android:textColor">@color/secondaryDarkColor</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textSize">23sp</item>
     </style>
 
-    <style name="Button" parent="Widget.Material3.Button.TextButton.Dialog">
+    <style name="ButtonNight" parent="Widget.Material3.Button.TextButton.Dialog">
         <item name="android:textColor">@color/primaryDarkColor</item>
         <item name="android:textSize">17sp</item>
         <item name="android:textStyle">bold</item>

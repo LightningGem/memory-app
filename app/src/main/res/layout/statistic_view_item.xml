@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <androidx.cardview.widget.CardView
+    android:backgroundTint="?attr/colorOnSecondary"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
@@ -11,6 +12,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="?attr/colorOnSecondary"
         android:layout_marginStart="12dp"
         android:layout_marginEnd="12dp"
         android:layout_marginTop="8dp"
@@ -43,7 +45,7 @@
         <TextView
             android:id="@+id/average_score_text"
             android:textStyle="bold"
-            android:textColor="@color/secondaryDarkColor"
+            android:textColor="?attr/colorSecondaryVariant"
             android:layout_marginEnd="10dp"
             android:layout_height="wrap_content"
             android:layout_width="wrap_content"
@@ -65,8 +67,8 @@
             android:id="@+id/line"
             android:layout_marginTop="2dp"
             android:layout_width="match_parent"
-            android:layout_height="1.5dp"
-            android:background="@color/gray"
+            android:layout_height="2dp"
+            android:background="?attr/colorSecondary"
             app:layout_constraintTop_toBottomOf="@id/barrier"
             app:layout_constraintStart_toStartOf="parent"/>
 
@@ -121,6 +123,7 @@
             android:textColor="@color/difficulty1Color"/>
 
         <TextView
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="16sp"
             android:id="@+id/desc2_text2"
             android:layout_width="wrap_content"
@@ -159,6 +162,7 @@
             android:textColor="@color/difficulty2Color"/>
 
         <TextView
+            android:textColor="?attr/colorOnPrimary"
             android:textSize="16sp"
             android:id="@+id/desc3_text2"
             android:layout_width="wrap_content"

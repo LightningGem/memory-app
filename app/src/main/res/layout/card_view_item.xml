@@ -13,13 +13,13 @@
        android:layout_height="100dp"
        android:elevation="50dp"
        app:cardCornerRadius="20dp">
-
       <ImageView
+          android:forceDarkAllowed="false"
           android:padding="5dp"
           android:id="@+id/card_image"
           android:layout_width="match_parent"
           android:layout_height="match_parent"
-          android:background="@android:color/white"
+          android:background="?attr/colorOnSecondary"
           android:scaleType="fitXY"
           tools:srcCompat="@drawable/pets_face_off_image" />
    </androidx.cardview.widget.CardView>

@@ -1,12 +1,10 @@
 package com.example.memory_app.presentation.gamescreen.view
 
 import android.app.Dialog
-import android.graphics.Typeface
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.widget.TextViewCompat
 import androidx.core.widget.TextViewCompat.setTextAppearance
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
@@ -29,7 +27,7 @@ class GameDialogFragment : DialogFragment() {
 
         this.isCancelable = args.result == MENU_CLICKED
 
-        val dialog = MaterialAlertDialogBuilder(requireContext())
+        val dialog = MaterialAlertDialogBuilder(requireActivity())
 
         when(args.result) {
             LOAD_FAIL -> dialog.setTitle(R.string.load_error_title)
@@ -50,7 +48,7 @@ class GameDialogFragment : DialogFragment() {
                     text = getString(R.string.result_score, args.result.toString())
                     setPadding(0, 45, 0, 0)
                     gravity = Gravity.CENTER_HORIZONTAL
-                    setTextAppearance(this, R.style.MaterialAlertDialog_App_Body_Text);
+                    setTextAppearance(this, R.style.BodyText)
                 }
                 dialogTextLayout.addView(text_view)
 

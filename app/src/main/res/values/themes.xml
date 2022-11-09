@@ -1,29 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Base application theme. -->
-    <style name="Theme.Memoryapp" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
-        <!-- Primary brand color. -->
+    <style name="Theme.Memoryapp" parent="Theme.MaterialComponents.DayNight">
+
         <item name="colorPrimary">@color/primaryColor</item>
         <item name="colorPrimaryVariant">@color/primaryDarkColor</item>
-        <item name="colorOnPrimary">@color/white</item>
-        <!-- Secondary brand color. -->
+        <!-- text, icon color -->
+        <item name="colorOnPrimary">@color/primaryLightColor</item>
+
         <item name="colorSecondary">@color/secondaryColor</item>
-        <item name="colorSecondaryVariant">@color/secondaryLightColor</item>
-        <item name="colorOnSecondary">@color/secondaryDarkColor</item>
-        <!-- Status bar color. -->
+        <item name="colorSecondaryVariant">@color/secondaryDarkColor</item>
+        <!-- background card color -->
+        <item name="colorOnSecondary">@color/secondaryLightColor</item>
+
         <item name="android:statusBarColor">?attr/colorPrimaryVariant</item>
-        <!-- Customize your theme here. -->
-        <item name="materialAlertDialogTheme">@style/ThemeOverlay.App.MaterialAlertDialog</item>
+        <item name="materialAlertDialogTheme">@style/MaterialAlertDialog</item>
     </style>
 
-    <style name="ThemeOverlay.App.MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
-        <item name="colorPrimary">@color/primaryTextColor</item>
-        <item name="colorSecondary">@color/secondaryColor</item>
-        <item name="colorSurface">@color/white</item>
-        <item name="colorOnSurface">@color/white</item>
-        <item name="alertDialogStyle">@style/MaterialAlertDialog.App</item>
-        <item name="materialAlertDialogTitleTextStyle">@style/MaterialAlertDialog.App.Title.Text</item>
-        <item name="materialAlertDialogBodyTextStyle">@style/MaterialAlertDialog.App.Body.Text</item>
-        <item name="buttonBarPositiveButtonStyle">@style/Widget.App.Button</item>
-        <item name="buttonBarNegativeButtonStyle">@style/Widget.App.Button</item>
+    <style name="MaterialAlertDialog" parent="ThemeOverlay.Material3.MaterialAlertDialog">
+        <item name="colorPrimary">@color/primaryColor</item>
+        <item name="colorSurface">@color/secondaryLightColor</item>
+        <item name="colorOnSurface">@color/secondaryLightColor</item>
+        <item name="alertDialogStyle">@style/dialogStyle</item>
+        <item name="materialAlertDialogTitleTextStyle">@style/TitleText</item>
+        <item name="materialAlertDialogBodyTextStyle">@style/BodyText</item>
+        <item name="buttonBarPositiveButtonStyle">@style/Button</item>
+        <item name="buttonBarNegativeButtonStyle">@style/Button</item>
     </style>
 </resources>
