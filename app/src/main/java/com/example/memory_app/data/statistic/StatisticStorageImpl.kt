@@ -8,15 +8,13 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.example.memory_app.data.statistic.StatisticStorageImpl.PreferencesKeys.AVERAGE_SCORE
 import com.example.memory_app.data.statistic.StatisticStorageImpl.PreferencesKeys.LEVELS_COMPLETED
 import com.example.memory_app.data.statistic.StatisticStorageImpl.PreferencesKeys.USER_PREFERENCES_NAME
-import com.example.memory_app.domain.repository.Score
-import com.example.memory_app.domain.repository.Statistic
+import com.example.memory_app.domain.entities.Score
+import com.example.memory_app.domain.entities.Statistic
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class StatisticStorageImpl @Inject constructor
     (@ApplicationContext private val context : Context) : StatisticStorage {
 

@@ -1,4 +1,4 @@
-package com.example.memory_app.domain.repository
+package com.example.memory_app.domain.entities
 
 import com.example.memory_app.domain.model.Difficulty
 

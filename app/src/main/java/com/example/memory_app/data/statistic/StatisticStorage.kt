@@ -1,6 +1,6 @@
 package com.example.memory_app.data.statistic
 
-import com.example.memory_app.domain.repository.Statistic
+import com.example.memory_app.domain.entities.Statistic
 import kotlinx.coroutines.flow.Flow
 
 interface StatisticStorage {

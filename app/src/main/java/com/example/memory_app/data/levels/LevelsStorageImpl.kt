@@ -4,7 +4,7 @@ import com.example.memory_app.data.levels.resources.LevelsResourcesHolder
 import com.example.memory_app.data.levels.resources.Resources
 import com.example.memory_app.domain.model.BoardGeneratorImpl
 import com.example.memory_app.domain.model.Difficulty
-import com.example.memory_app.domain.repository.Level
+import com.example.memory_app.domain.entities.Level
 import com.example.memory_app.presentation.gamescreen.view.CardsAdapter
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject

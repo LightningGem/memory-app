@@ -5,23 +5,16 @@ import android.content.Context
 import android.net.Uri
 import androidx.core.net.toUri
 import com.example.memory_app.R
-import com.google.android.gms.tasks.CancellationTokenSource
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
-import kotlinx.coroutines.suspendCancellableCoroutine
-import kotlinx.coroutines.tasks.asDeferred
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 import javax.inject.Inject
-import javax.inject.Singleton
-import kotlin.coroutines.resume
-import kotlin.coroutines.suspendCoroutine
 
-@Singleton
 class LevelsResourcesHolderImpl @Inject constructor
     (@ApplicationContext context : Context) : LevelsResourcesHolder {
 

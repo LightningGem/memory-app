@@ -3,15 +3,13 @@ package com.example.memory_app.data
 import com.example.memory_app.data.levels.LevelsStorage
 import com.example.memory_app.data.statistic.StatisticStorage
 import com.example.memory_app.domain.repository.GameRepository
-import com.example.memory_app.domain.repository.Level
-import com.example.memory_app.domain.repository.Score
-import com.example.memory_app.domain.repository.Statistic
+import com.example.memory_app.domain.entities.Level
+import com.example.memory_app.domain.entities.Score
+import com.example.memory_app.domain.entities.Statistic
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import javax.inject.Inject
-import javax.inject.Singleton
 
-@Singleton
 class GameRepositoryImpl @Inject constructor
     (private val statisticStorage: StatisticStorage,
      private val levelsStorage: LevelsStorage

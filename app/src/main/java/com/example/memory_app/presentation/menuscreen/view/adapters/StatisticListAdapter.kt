@@ -3,14 +3,12 @@ package com.example.memory_app.presentation.menuscreen.view.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.datastore.preferences.core.preferencesOf
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.memory_app.R
 import com.example.memory_app.databinding.StatisticViewItemBinding
-import com.example.memory_app.domain.repository.Statistic
-import com.example.memory_app.domain.use_cases.LoadLevelsInfoUseCase
+import com.example.memory_app.domain.entities.Statistic
 
 
 class StatisticListAdapter() : ListAdapter<Statistic, StatisticListAdapter.LevelViewHolder>(DiffCallback) {

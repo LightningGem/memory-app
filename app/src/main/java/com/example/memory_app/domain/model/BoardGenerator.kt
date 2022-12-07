@@ -1,10 +1,12 @@
 package com.example.memory_app.domain.model
 
+import javax.inject.Inject
+
 interface BoardGenerator {
     fun generateListOfCards(difficulty : Difficulty, uniqueIds : List<Int>) : MutableList<Card>
 }
 
-object BoardGeneratorImpl : BoardGenerator {
+class BoardGeneratorImpl @Inject constructor() : BoardGenerator {
     override fun generateListOfCards(
         difficulty: Difficulty,
         uniqueIds: List<Int>

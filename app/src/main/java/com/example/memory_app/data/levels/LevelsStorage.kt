@@ -1,6 +1,6 @@
 package com.example.memory_app.data.levels
 
-import com.example.memory_app.domain.repository.Level
+import com.example.memory_app.domain.entities.Level
 import kotlinx.coroutines.flow.Flow
 
 interface LevelsStorage {

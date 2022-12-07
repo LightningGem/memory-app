@@ -4,7 +4,7 @@ Simple Memory Cards Game app using MVVM-Clean Architecture.
 
 **App features:**
 - Different level difficulties
-- Available remote (online) levels
+- Access to remote levels through Cloud Firestore
 - Dark theme support
 ## Tech stack
 
@@ -21,6 +21,7 @@ Simple Memory Cards Game app using MVVM-Clean Architecture.
 <img src="docs/Screenshot_2.png" height="600"/> <img src="docs/Screenshot_2_2.png" height="600"/>
 <img src="docs/Screenshot_3.png" height="600"/> <img src="docs/Screenshot_3_2.png" height="600"/> 
 <img src="docs/Screenshot_4.png" height="600"/> <img src="docs/Screenshot_4_2.png" height="600"/> 
+<img src="docs/Screenshot_5.png" height="600"/> <img src="docs/Screenshot_5_2.png" height="600"/> 
 </p>
 
 ## Credits
