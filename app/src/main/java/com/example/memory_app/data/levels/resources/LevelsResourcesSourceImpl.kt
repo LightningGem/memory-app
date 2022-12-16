@@ -15,8 +15,8 @@ import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 import javax.inject.Inject
 
-class LevelsResourcesHolderImpl @Inject constructor
-    (@ApplicationContext context : Context) : LevelsResourcesHolder {
+class LevelsResourcesSourceImpl @Inject constructor
+    (@ApplicationContext context : Context) : LevelsResourcesSource {
 
     companion object {
         const val COLLECTION_PATH = "levels"

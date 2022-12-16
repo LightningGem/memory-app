@@ -10,14 +10,13 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.bumptech.glide.request.RequestOptions
 import com.example.memory_app.R
-import com.example.memory_app.data.levels.resources.LevelsResourcesHolder
+import com.example.memory_app.data.levels.resources.LevelsResourcesSource
 import com.example.memory_app.databinding.LevelViewItemBinding
 import com.example.memory_app.domain.model.Difficulty
-import java.util.*
 
 
 class LevelsInfoListAdapter(private val onClick: (String) -> Unit,
-                            private val levelResources : LevelsResourcesHolder) :
+                            private val levelResources : LevelsResourcesSource) :
     ListAdapter<Pair<String, Difficulty>, LevelsInfoListAdapter.LevelViewHolder>(DiffCallback) {
 
     inner class LevelViewHolder(private var binding: LevelViewItemBinding)

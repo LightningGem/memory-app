@@ -1,11 +1,12 @@
 package com.example.memory_app.data.di
 
-import com.example.memory_app.data.levels.LevelsStorage
-import com.example.memory_app.data.levels.LevelsStorageImpl
-import com.example.memory_app.data.levels.resources.LevelsResourcesHolder
-import com.example.memory_app.data.levels.resources.LevelsResourcesHolderImpl
-import com.example.memory_app.data.statistic.StatisticStorage
-import com.example.memory_app.data.statistic.StatisticStorageImpl
+import com.example.memory_app.data.levels.LevelsSource
+import com.example.memory_app.data.levels.LevelsSourceImpl
+import com.example.memory_app.data.levels.resources.LevelsResourcesSource
+import com.example.memory_app.data.levels.resources.LevelsResourcesSourceImpl
+import com.example.memory_app.data.statistic.StatisticSource
+import com.example.memory_app.data.statistic.StatisticSourceImpl
+
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -17,13 +18,13 @@ import javax.inject.Singleton
 abstract class StorageModule {
     @Singleton
     @Binds
-    abstract fun bindLevelsStorage(levelsStorageImpl: LevelsStorageImpl) : LevelsStorage
+    abstract fun bindLevelsSource(levelsSourceImpl: LevelsSourceImpl) : LevelsSource
 
     @Singleton
     @Binds
-    abstract fun bindStatisticStorage(statisticStorageImpl: StatisticStorageImpl) : StatisticStorage
+    abstract fun bindStatisticSource(statisticSourceImpl: StatisticSourceImpl) : StatisticSource
 
     @Singleton
     @Binds
-    abstract fun bindResourcesHolder(levelsResourcesHolderImpl: LevelsResourcesHolderImpl) : LevelsResourcesHolder
+    abstract fun bindResourcesHolder(levelsResourcesSourceImpl: LevelsResourcesSourceImpl) : LevelsResourcesSource
 }

@@ -12,7 +12,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.memory_app.R
-import com.example.memory_app.data.levels.resources.LevelsResourcesHolder
+import com.example.memory_app.data.levels.resources.LevelsResourcesSource
 import com.example.memory_app.databinding.FragmentGameBinding
 import com.example.memory_app.presentation.gamescreen.viewmodel.GameViewModel
 import com.example.memory_app.presentation.gamescreen.viewmodel.Over
@@ -29,7 +29,7 @@ class GameFragment : Fragment() {
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var resources : LevelsResourcesHolder
+    lateinit var resources : LevelsResourcesSource
 
     private val viewModel: GameViewModel by viewModels()
 

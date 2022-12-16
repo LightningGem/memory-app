@@ -1,7 +1,9 @@
 package com.example.memory_app.domain.di
 
-import com.example.memory_app.data.GameRepositoryImpl
-import com.example.memory_app.domain.repository.GameRepository
+import com.example.memory_app.data.LevelsRepositoryImpl
+import com.example.memory_app.data.StatisticRepositoryImpl
+import com.example.memory_app.domain.repository.LevelsRepository
+import com.example.memory_app.domain.repository.StatisticRepository
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -17,7 +19,11 @@ import javax.inject.Singleton
 abstract class RepositoryModule {
     @Singleton
     @Binds
-    abstract fun bindGameRepository(gameRepositoryImpl: GameRepositoryImpl): GameRepository
+    abstract fun bindStatisticRepository(statisticRepositoryImpl: StatisticRepositoryImpl): StatisticRepository
+
+    @Singleton
+    @Binds
+    abstract fun bindLevelsRepository(levelsRepositoryImpl: LevelsRepositoryImpl): LevelsRepository
 
     companion object {
         @Provides

@@ -10,7 +10,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.memory_app.R
-import com.example.memory_app.data.levels.resources.LevelsResourcesHolder
+import com.example.memory_app.data.levels.resources.LevelsResourcesSource
 import com.example.memory_app.databinding.FragmentMenuBinding
 import com.example.memory_app.presentation.menuscreen.view.adapters.LevelsInfoListAdapter
 import com.example.memory_app.presentation.menuscreen.view.adapters.StatisticListAdapter
@@ -27,7 +27,7 @@ class MenuFragment : Fragment() {
     private val binding get() = _binding!!
 
     @Inject
-    lateinit var resources : LevelsResourcesHolder
+    lateinit var resources : LevelsResourcesSource
 
     private val menuViewModel: MenuViewModel by viewModels()
 

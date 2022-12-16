@@ -1,6 +1,6 @@
 package com.example.memory_app.data.levels
 
-import com.example.memory_app.data.levels.resources.LevelsResourcesHolder
+import com.example.memory_app.data.levels.resources.LevelsResourcesSource
 import com.example.memory_app.data.levels.resources.Resources
 import com.example.memory_app.domain.model.BoardGeneratorImpl
 import com.example.memory_app.domain.model.Difficulty
@@ -9,8 +9,8 @@ import com.example.memory_app.presentation.gamescreen.view.CardsAdapter
 import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
-class LevelsStorageImpl @Inject constructor
-    (private val resourcesHolder : LevelsResourcesHolder) : LevelsStorage {
+class LevelsSourceImpl @Inject constructor
+    (private val resourcesHolder : LevelsResourcesSource) : LevelsSource {
     /**
     CardId in View layer would associate with its image like this : imageUris.get(CardId)
     (check [CardsAdapter]). Board generation depends on [Difficulty] and list of CardId`s

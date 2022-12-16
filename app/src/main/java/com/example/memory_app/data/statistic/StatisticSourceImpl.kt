@@ -5,9 +5,9 @@ import androidx.datastore.preferences.core.doublePreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.example.memory_app.data.statistic.StatisticStorageImpl.PreferencesKeys.AVERAGE_SCORE
-import com.example.memory_app.data.statistic.StatisticStorageImpl.PreferencesKeys.LEVELS_COMPLETED
-import com.example.memory_app.data.statistic.StatisticStorageImpl.PreferencesKeys.USER_PREFERENCES_NAME
+import com.example.memory_app.data.statistic.StatisticSourceImpl.PreferencesKeys.AVERAGE_SCORE
+import com.example.memory_app.data.statistic.StatisticSourceImpl.PreferencesKeys.LEVELS_COMPLETED
+import com.example.memory_app.data.statistic.StatisticSourceImpl.PreferencesKeys.USER_PREFERENCES_NAME
 import com.example.memory_app.domain.entities.Score
 import com.example.memory_app.domain.entities.Statistic
 import dagger.hilt.android.qualifiers.ApplicationContext
@@ -15,8 +15,8 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import javax.inject.Inject
 
-class StatisticStorageImpl @Inject constructor
-    (@ApplicationContext private val context : Context) : StatisticStorage {
+class StatisticSourceImpl @Inject constructor
+    (@ApplicationContext private val context : Context) : StatisticSource {
 
     private val Context.dataStore by preferencesDataStore(USER_PREFERENCES_NAME)
 
