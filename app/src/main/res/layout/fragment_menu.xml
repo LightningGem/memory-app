@@ -25,19 +25,17 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
     </ImageView>
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.recyclerview.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
             android:splitMotionEvents="false"
             android:id="@+id/levels_recycle_view"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
+            android:scrollbars="vertical"
             tools:context=".presentation.menuscreen.view.MenuFragment"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
-        </androidx.recyclerview.widget.RecyclerView>
-    </ScrollView>
+    </androidx.recyclerview.widget.RecyclerView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
