@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.memory_app.R
 import com.example.memory_app.data.levels.resources.LevelsResourcesSource
 import com.example.memory_app.databinding.FragmentMenuBinding
+import com.example.memory_app.domain.model.Source
 import com.example.memory_app.presentation.menuscreen.view.adapters.LevelsInfoListAdapter
 import com.example.memory_app.presentation.menuscreen.view.adapters.StatisticListAdapter
 import com.example.memory_app.presentation.menuscreen.viewmodel.MenuViewModel
@@ -85,7 +86,7 @@ class MenuFragment : Fragment() {
 
             launchWhenStarted {
                 menuViewModel.statistic.collect {
-                    if (it != null && it.levelsCompleted != 0) statisticListAdapter.submitList(listOf(it))
+                    if (it != null) statisticListAdapter.submitList(listOf(it))
                 }
             }
         }
@@ -97,19 +98,21 @@ class MenuFragment : Fragment() {
             menuViewModel.changeLevelsSource()
         }
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            menuViewModel.isRemoteSource.collect { isRemote ->
-                if(isRemote) {
-                    menu.findItem(R.id.retry_item).isVisible = true
-                    menu.findItem(R.id.sourcetype_item).actionView
-                        .findViewById<ImageView>(R.id.sourse_type)
-                        .setImageResource(R.drawable.local)
-                } else {
-                    menu.findItem(R.id.retry_item).isVisible = false
-                    menu.findItem(R.id.sourcetype_item).actionView
-                        .findViewById<ImageView>(R.id.sourse_type)
-                        .setImageResource(R.drawable.cloud)
+            menuViewModel.source.collect { source ->
+                when (source) {
+                    Source.REMOTE -> {
+                        menu.findItem(R.id.retry_item).isVisible = true
+                        menu.findItem(R.id.sourcetype_item).actionView
+                            .findViewById<ImageView>(R.id.sourse_type)
+                            .setImageResource(R.drawable.local)
+                    }
+                    Source.LOCAL -> {
+                        menu.findItem(R.id.retry_item).isVisible = false
+                        menu.findItem(R.id.sourcetype_item).actionView
+                            .findViewById<ImageView>(R.id.sourse_type)
+                            .setImageResource(R.drawable.cloud)
+                    }
                 }
-
             }
         }
     }

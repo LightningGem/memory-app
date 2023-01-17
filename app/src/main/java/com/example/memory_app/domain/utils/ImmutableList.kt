@@ -1,4 +1,4 @@
-package com.example.memory_app.utils
+package com.example.memory_app.domain.utils
 
 /**
  * Wrapper for mutable list

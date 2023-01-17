@@ -1,6 +1,6 @@
 package com.example.memory_app.domain.model
 
-import com.example.memory_app.utils.ImmutableList
+import com.example.memory_app.domain.utils.ImmutableList
 
 interface Game {
     fun onCardSelected(position: Int): Reaction

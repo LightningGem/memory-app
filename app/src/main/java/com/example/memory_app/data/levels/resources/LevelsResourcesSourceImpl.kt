@@ -5,6 +5,11 @@ import android.content.Context
 import android.net.Uri
 import androidx.core.net.toUri
 import com.example.memory_app.R
+import com.example.memory_app.data.utils.Constants.COLLECTION_PATH
+import com.example.memory_app.data.utils.Constants.KEY_CARDS_URIS
+import com.example.memory_app.data.utils.Constants.KEY_DIFFICULTY
+import com.example.memory_app.data.utils.Constants.KEY_FACE_OFF_URI
+import com.example.memory_app.data.utils.Constants.KEY_ICON_URI
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -17,14 +22,6 @@ import javax.inject.Inject
 
 class LevelsResourcesSourceImpl @Inject constructor
     (@ApplicationContext context : Context) : LevelsResourcesSource {
-
-    companion object {
-        const val COLLECTION_PATH = "levels"
-        const val KEY_CARDS_URIS = "cardImagesUris"
-        const val KEY_DIFFICULTY = "difficulty"
-        const val KEY_FACE_OFF_URI = "faceOffImageUri"
-        const val KEY_ICON_URI = "levelIconImageUri"
-    }
 
     private fun Context.resourceUri(resourceId: Int): Uri = with(resources) {
         Uri.Builder()
@@ -86,38 +83,43 @@ class LevelsResourcesSourceImpl @Inject constructor
         )
     )
 
+    /**
+     * TODO :
+     * fix application crashes on restore after process death in game screen with remote level.
+     * **/
     private lateinit var remoteResources: List<Resources>
 
     override fun getLevelResources(levelName : String) : Resources =
         try { localResources.first { it.levelName == levelName} }
         catch (e : NoSuchElementException) { remoteResources.first { it.levelName == levelName} }
 
-    override fun getAllLevelsResources(remote : Boolean) : Flow<List<Resources>> {
-        if(!remote) return flow { emit(localResources) }
-        return flow {
-            val resources = mutableListOf<Resources>()
-            var result : List<Resources>? = null
-            var exception : Exception? = null
+    override fun getAllLevelsResources(source: com.example.memory_app.domain.model.Source) : Flow<List<Resources>> {
+        return when(source) {
+            com.example.memory_app.domain.model.Source.LOCAL -> flow { emit(localResources) }
+            com.example.memory_app.domain.model.Source.REMOTE -> flow {
+                val resources = mutableListOf<Resources>()
+                var result: List<Resources>? = null
+                var exception: Exception? = null
 
-            Firebase.firestore.collection(COLLECTION_PATH)
-                .get(Source.SERVER)
-                .addOnSuccessListener { documents -> documents.forEach { document ->
-                    resources.add(Resources(
-                        levelName = document.id,
-                        difficulty = document.getDouble(KEY_DIFFICULTY)!!.toInt(),
-                        cardImagesUris = (document.get(KEY_CARDS_URIS)
-                                as List<String>).map { it.toUri() },
-                        faceOffImageUri = document.getString(KEY_FACE_OFF_URI)!!.toUri(),
-                        levelIconImageUri = document.getString(KEY_ICON_URI)!!.toUri() ))
-                }
-                    result = resources.sortedBy { it.difficulty }
-                }
-                .addOnFailureListener { exception = it }
-                .await()
+                Firebase.firestore.collection(COLLECTION_PATH)
+                    .get(Source.SERVER)
+                    .addOnSuccessListener { documents ->
+                        documents.forEach { document ->
+                            resources.add(Resources(
+                                levelName = document.id,
+                                difficulty = document.getDouble(KEY_DIFFICULTY)!!.toInt(),
+                                cardImagesUris = (document.get(KEY_CARDS_URIS) as List<String>).map { it.toUri() },
+                                faceOffImageUri = document.getString(KEY_FACE_OFF_URI)!!.toUri(),
+                                levelIconImageUri = document.getString(KEY_ICON_URI)!!.toUri()))
+                        }
+                        result = resources.sortedBy { it.difficulty }
+                    }
+                    .addOnFailureListener { exception = it }
+                    .await()
 
-            remoteResources = result ?: throw exception!!
-            emit(remoteResources)
+                remoteResources = result ?: throw exception!!
+                emit(remoteResources)
+            }
         }
     }
-
 }
