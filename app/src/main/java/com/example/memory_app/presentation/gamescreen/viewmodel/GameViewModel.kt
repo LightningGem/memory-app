@@ -22,10 +22,10 @@ class GameViewModel @Inject constructor
     val levelName = savedStateHandle.get<String>("levelName")!!
     private val game = loadLevelUseCase(levelName)
 
-    private val _cardsBoard = MutableStateFlow(game.getBoard().cards)
+    private val _cardsBoard = MutableStateFlow(game.getBoard())
     val cardsBoard : StateFlow<List<Card>> = _cardsBoard
 
-    private val _mismatchesLeft = MutableStateFlow(game.getBoard().mismatchesLeft)
+    private val _mismatchesLeft = MutableStateFlow(game.getMismatchesLeft())
     val mismatchesLeft : StateFlow<Int> = _mismatchesLeft
 
     private val overEventChannel = Channel<Over>()
@@ -51,7 +51,7 @@ class GameViewModel @Inject constructor
                 }
             }
 
-            is Reaction.Finished -> {
+            is Reaction.Win -> {
                 _cardsBoard.value = reaction.cards
                 viewModelScope.launch {
                     val resultScore = saveGameResultUseCase(reaction.mismatchedTimes, levelName)

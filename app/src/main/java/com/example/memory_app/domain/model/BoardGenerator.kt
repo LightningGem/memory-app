@@ -29,7 +29,7 @@ class BoardGeneratorImpl @Inject constructor() : BoardGenerator {
             return generateListOfCards(difficulty,  newUniqueIds)
         }
 
-        return buildList<Card> { uniqueIds.forEach { identifier ->
+        return buildList { uniqueIds.forEach { identifier ->
                 repeat(difficulty.cardsInRow) {
                     add(Card(identifier))
                 }

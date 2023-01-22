@@ -86,7 +86,7 @@ class LevelsResourcesSourceImpl @Inject constructor
     /**
      * TODO :
      * fix application crashes on restore after process death in game screen with remote level.
-     * **/
+     **/
     private lateinit var remoteResources: List<Resources>
 
     override fun getLevelResources(levelName : String) : Resources =

@@ -4,7 +4,8 @@ import com.example.memory_app.domain.utils.ImmutableList
 
 interface Game {
     fun onCardSelected(position: Int): Reaction
-    fun getBoard(): Reaction.Running
+    fun getBoard(): List<Card>
+    fun getMismatchesLeft() : Int
 }
 
 class GameImpl(
@@ -13,7 +14,12 @@ class GameImpl(
     private val mismatchAllowed : Int
 ) : Game {
 
-    init { require(board.size % cardsInRow == 0) }
+    init {
+        require(board.size > 0)
+        require(cardsInRow > 0)
+        require(mismatchAllowed > 0)
+        require(board.size % cardsInRow == 0)
+    }
 
     private val previouslySelectedCardsPositions: MutableList<Int> = mutableListOf()
 
@@ -43,14 +49,15 @@ class GameImpl(
         cardsInRowMismatched = false
     }
 
+    override fun getBoard() : List<Card> = ImmutableList(board)
 
-    override fun getBoard(): Reaction.Running = Reaction.Running(ImmutableList(board), mismatchesLeft)
+    override fun getMismatchesLeft(): Int = mismatchesLeft
 
     override fun onCardSelected(position: Int): Reaction {
         if (cardIsAlreadyOpen(position) || loss) return Reaction.Nothing
 
         // previous cards clicked check
-        if (cardsInRowMismatched) restartRow{ copy(isFaceUp = false) }
+        if (cardsInRowMismatched) restartRow { copy(isFaceUp = false) }
 
         if (previouslySelectedCardsPositions.size == cardsInRow)
         { restartRow{ copy(isMatched = true) } }
@@ -65,12 +72,12 @@ class GameImpl(
 
         // current card clicked check for game Finish or Loss
         if (isGameOver()) {
-            if(loss) return Reaction.Loss(ImmutableList(board))
+            if(loss) return Reaction.Loss(getBoard())
 
-            restartRow{copy(isMatched = true)}
-            return Reaction.Finished(ImmutableList(board), mismatchAllowed - mismatchesLeft)
+            restartRow{ copy(isMatched = true) }
+            return Reaction.Win(getBoard(), mismatchAllowed - mismatchesLeft)
         }
 
-        return getBoard()
+        return Reaction.Running(getBoard(), getMismatchesLeft())
     }
 }
