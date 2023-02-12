@@ -11,7 +11,7 @@ import kotlinx.coroutines.flow.*
 import javax.inject.Inject
 
 class LevelsSourceImpl @Inject constructor
-    (private val resourcesHolder : LevelsResourcesSource) : LevelsSource {
+    (private val levelsResourcesSource : LevelsResourcesSource) : LevelsSource {
 
     /**
      * CardId in View layer would associate with its image like this : imageUris.get(CardId)
@@ -29,10 +29,10 @@ class LevelsSourceImpl @Inject constructor
 
     private fun List<Resources>.toListOfLevels() = this.map { resources -> resources.toLevel() }
 
-    override fun getLevel(name: String): Level = resourcesHolder.getLevelResources(name).toLevel()
+    override fun getLevel(name: String): Level = levelsResourcesSource.getLevelResources(name).toLevel()
 
     override fun getAllLevels(source: Source): Flow<List<Level>> = flow {
-          resourcesHolder.getAllLevelsResources(source).collect { resources ->
+          levelsResourcesSource.getAllLevelsResources(source).collect { resources ->
               emit(resources.toListOfLevels())
           }
     }

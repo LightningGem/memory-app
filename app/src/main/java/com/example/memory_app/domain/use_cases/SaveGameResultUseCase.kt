@@ -11,18 +11,15 @@ import javax.inject.Named
 
 class SaveGameResultUseCase @Inject constructor
     (private val statisticRepository: StatisticRepository,
-     private val levelsRepository: LevelsRepository,
-     @Named("IO") private val dispatcher: CoroutineDispatcher) {
+     private val levelsRepository: LevelsRepository) {
 
-    suspend operator fun invoke(mismatchedTimes : Int, levelName: String) : Score =
-        withContext(dispatcher) {
+    suspend operator fun invoke(mismatchedTimes : Int, levelName: String) : Score  {
         val difficulty = levelsRepository.getLevel(levelName).difficulty
-        val score = getScore(mismatchedTimes, difficulty)
+        val score = calculateScore(mismatchedTimes, difficulty)
         statisticRepository.updateStatistic(score)
-        score
+        return score
     }
 
-    private fun getScore(mismatchedTimes : Int, difficulty: Difficulty) : Score {
-        return Score((difficulty.mismatchAllowed - mismatchedTimes).toDouble())
-    }
+    private fun calculateScore(mismatchedTimes : Int, difficulty: Difficulty) =
+        Score((difficulty.mismatchAllowed - mismatchedTimes).toDouble())
 }

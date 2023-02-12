@@ -8,12 +8,8 @@ import com.example.memory_app.domain.repository.LevelsRepository
 import com.example.memory_app.domain.repository.StatisticRepository
 import dagger.Binds
 import dagger.Module
-import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import kotlinx.coroutines.CoroutineDispatcher
-import kotlinx.coroutines.Dispatchers
-import javax.inject.Named
 import javax.inject.Singleton
 
 @Module
@@ -30,17 +26,4 @@ abstract class RepositoryModule {
     @Singleton
     @Binds
     abstract fun bindConstraintsRepository(constraintsRepository: ConstraintsRepositoryImpl) : ConstraintsRepository
-    companion object {
-        @Provides
-        @Named("IO")
-        fun providesDispatcherIO(): CoroutineDispatcher = Dispatchers.IO
-
-        @Provides
-        @Named("Default")
-        fun providesDispatcherDefault(): CoroutineDispatcher = Dispatchers.Default
-
-        @Provides
-        @Named("Main")
-        fun providesDispatcherMain(): CoroutineDispatcher = Dispatchers.Main
-    }
 }
