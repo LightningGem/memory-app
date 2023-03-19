@@ -3,6 +3,7 @@ package com.example.memory_app.data.levels.resources
 import android.content.ContentResolver
 import android.content.Context
 import android.net.Uri
+import android.os.Process
 import androidx.core.net.toUri
 import com.example.memory_app.R
 import com.example.memory_app.data.utils.Constants.COLLECTION_PATH
@@ -10,12 +11,15 @@ import com.example.memory_app.data.utils.Constants.KEY_CARDS_URIS
 import com.example.memory_app.data.utils.Constants.KEY_DIFFICULTY
 import com.example.memory_app.data.utils.Constants.KEY_FACE_OFF_URI
 import com.example.memory_app.data.utils.Constants.KEY_ICON_URI
-import com.google.firebase.firestore.Source
+import com.example.memory_app.domain.model.Source
+import com.google.firebase.firestore.Source as FirebaseSource
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.flow
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.tasks.await
 import java.lang.Exception
 import javax.inject.Inject
@@ -83,26 +87,22 @@ class LevelsResourcesSourceImpl @Inject constructor
         )
     )
 
-    /**
-     * TODO :
-     * fix application crashes on restore after process death in game screen with remote level.
-     **/
-    private lateinit var remoteResources: List<Resources>
+    private var remoteResources: List<Resources> = emptyList()
 
     override fun getLevelResources(levelName : String) : Resources =
-        try { localResources.first { it.levelName == levelName} }
-        catch (e : NoSuchElementException) { remoteResources.first { it.levelName == levelName} }
+        localResources.firstOrNull { it.levelName == levelName } ?:
+        remoteResources.first { it.levelName == levelName}
 
-    override fun getAllLevelsResources(source: com.example.memory_app.domain.model.Source) : Flow<List<Resources>> {
+    override fun getAllLevelsResources(source: Source) : Flow<List<Resources>> {
         return when(source) {
-            com.example.memory_app.domain.model.Source.LOCAL -> flow { emit(localResources) }
-            com.example.memory_app.domain.model.Source.REMOTE -> flow {
+            Source.LOCAL -> flow { emit(localResources) }
+            Source.REMOTE -> flow {
                 val resources = mutableListOf<Resources>()
                 var result: List<Resources>? = null
                 var exception: Exception? = null
 
                 Firebase.firestore.collection(COLLECTION_PATH)
-                    .get(Source.SERVER)
+                    .get(FirebaseSource.SERVER)
                     .addOnSuccessListener { documents ->
                         documents.forEach { document ->
                             resources.add(Resources(

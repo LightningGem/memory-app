@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Gravity
 import android.widget.LinearLayout
 import android.widget.TextView
-import androidx.core.widget.TextViewCompat.setTextAppearance
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
@@ -48,7 +47,7 @@ class GameDialogFragment : DialogFragment() {
                     text = getString(R.string.result_score, args.result.toString())
                     setPadding(0, 45, 0, 0)
                     gravity = Gravity.CENTER_HORIZONTAL
-                    setTextAppearance(this, R.style.BodyText)
+                    setTextAppearance(R.style.BodyText)
                 }
                 dialogTextLayout.addView(text_view)
 
